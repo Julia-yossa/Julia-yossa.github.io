@@ -1,15 +1,17 @@
 body {
     text-align: center;
+    background-image: url(https://images.pexels.com/photos/255379/pexels-photo-255379.jpeg?auto=compress&cs=tinysrgb&h=350);
 }
 
 h1 {
-    font-family: Monoton;
+    font-family: Aclonica;
     font-size: 70px;
     margin: 0.2em;
 }
 
 h2 {
     margin: 1em 0 0.25em;
+    font-family: sofia;
 }
 
 h2:first-of-type {
