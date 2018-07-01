@@ -1,6 +1,8 @@
 var color, height, width;
 // Select color input
 color = $("#colorPicker").val();
+/*event.default is used to prevent the grid from refreshing each 
+time submit is clicked*/
 $("#sizePicker").submit(function(event){event.preventDefault();
 // Select size input
 h = $("#inputHeight").val();
@@ -15,10 +17,12 @@ function makeGrid(h,w) {
   $("#pixelCanvas").append('<tr id=row' +i +'></tr>');
   for ( var j = 1; j <= w; j++){
     $("#row"+i).append("<td></td>");
+    $("td").attr("class","pixel");
   }
  }
 } 
 ;
-$("td").click(function colorChange(color){
-        $(this).css("background-color", color);
-      });  
+// select and apply color using event delegation
+    $("#pixelCanvas").on("click",".pixel", function(){
+    	$(this).css("background-color", color);
+    });
