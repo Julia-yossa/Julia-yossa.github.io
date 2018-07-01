@@ -1,3 +1,6 @@
+html {
+    background-color: #999999;
+}
 body {
     text-align: center;
 }
@@ -18,7 +21,9 @@ h2:first-of-type {
     margin-top: 0.5em;
 }
 
-table,
+table {
+    border: 3px solid blue;
+}
 tr,
 td {
     border: 1px solid black;
