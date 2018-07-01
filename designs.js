@@ -1,6 +1,5 @@
 var color, height, width;
-// Select color input
-color = $("#colorPicker").val();
+
 /*event.default is used to prevent the grid from refreshing each 
 time submit is clicked*/
 $("#sizePicker").submit(function(event){event.preventDefault();
@@ -24,5 +23,7 @@ function makeGrid(h,w) {
 ;
 // select and apply color using event delegation
     $("#pixelCanvas").on("click",".pixel", function(){
+        // Select color input
+        color = $("#colorPicker").val();
     	$(this).css("background-color", color);
     });
