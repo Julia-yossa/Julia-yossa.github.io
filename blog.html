@@ -6,46 +6,90 @@
     <title>Julia Yossa | Blog</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="style.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <!-- Google tag (gtag.js) -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-KWEQCJP536"></script>
-        <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        base: { light: '#F4F1EA', dark: '#141414' },
+                        card: { light: '#FFFFFF', dark: '#1C1C1C' },
+                        text: {
+                            main: { light: '#1C1C1C', dark: '#EDEDED' },
+                            muted: { light: '#6B6B6B', dark: '#A3A3A3' }
+                        },
+                        border: { light: '#E5E0D8', dark: '#2E2E2E' }
+                    }
+                }
+            }
+        }
+    </script>
+    <script>
+        (function() {
+            const hour = new Date().getHours();
+            const isDay = hour >= 6 && hour < 20;
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark' || (!savedTheme && !isDay)) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        })();
+    </script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KWEQCJP536"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
 
-          gtag('config', 'G-KWEQCJP536');
-        </script>
+        gtag('config', 'G-KWEQCJP536');
+    </script>
 </head>
-<body class="bg-gray-900 text-white font-sans">
-    <header class="bg-gray-900/70 backdrop-blur-lg fixed top-0 left-0 right-0 z-10">
+
+<body class="bg-base-light dark:bg-base-dark text-text-main-light dark:text-text-main-dark font-sans corner-flowers-bg">
+
+    <header class="bg-base-light/80 dark:bg-base-dark/80 backdrop-blur-lg fixed top-0 left-0 right-0 z-50 border-b border-border-light dark:border-border-dark">
         <div class="container mx-auto px-4">
-            <nav class="flex items-center justify-between h-20" role="navigation" aria-label="Main">
-                <button id="lang-toggle" class="bg-gray-800 text-indigo-400 py-2 px-4 rounded-full text-sm font-semibold focus:outline-none" aria-label="Toggle language between English and French">
-                    Français / English
-                </button>
-                <a href="index.html" class="text-2xl font-bold ml-4">JY</a>
-                <ul class="hidden md:flex space-x-8 ml-auto">
-                    <li><a href="index.html#about" class="hover:text-indigo-400 transition-colors" data-lang-en="About" data-lang-fr="À propos">About</a></li>
-                    <li><a href="blog.html" class="hover:text-indigo-400 transition-colors" data-lang-en="Insights" data-lang-fr="Réflexions">Insights</a></li>
-                    <li><a href="art-ai.html" class="hover:text-indigo-400 transition-colors" data-lang-en="Art & AI" data-lang-fr="Art & IA">Art & AI</a></li>
-                    <li><a href="index.html#contact" class="hover:text-indigo-400 transition-colors" data-lang-en="Contact" data-lang-fr="Contact">Contact</a></li>
+            <nav class="flex items-center justify-between h-16" role="navigation" aria-label="Main">
+                <div class="flex items-center space-x-4">
+                    <a href="index.html" class="text-xl font-bold tracking-tight">JY</a>
+                    <span id="live-clock" class="text-sm font-mono text-text-muted-light dark:text-text-muted-dark tabular-nums tracking-wider opacity-70">00:00:00</span>
+                </div>
+                
+                <ul class="hidden md:flex space-x-8 ml-auto text-sm font-medium">
+                    <li><a href="index.html#about" class="hover:text-indigo-500 dark:hover:text-indigo-400 transition-colors" data-lang-en="About" data-lang-fr="À propos">About</a></li>
+                    <li><a href="blog.html" class="hover:text-indigo-500 dark:hover:text-indigo-400 transition-colors" data-lang-en="Insights" data-lang-fr="Réflexions">Insights</a></li>
+                    <li><a href="art-ai.html" class="hover:text-indigo-500 dark:hover:text-indigo-400 transition-colors" data-lang-en="Art & AI" data-lang-fr="Art & IA">Art & AI</a></li>
+                    <li><a href="index.html#contact" class="hover:text-indigo-500 dark:hover:text-indigo-400 transition-colors" data-lang-en="Contact" data-lang-fr="Contact">Contact</a></li>
                 </ul>
-                <div class="md:hidden ml-auto">
-                    <button id="mobile-menu-button" class="text-white focus:outline-none" aria-label="Open main menu">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-4 6h16"></path>
-                        </svg>
+
+                <div class="flex items-center space-x-4 ml-8">
+                    <button id="theme-toggle" class="text-text-muted-light dark:text-text-muted-dark hover:text-text-main-light dark:hover:text-text-main-dark focus:outline-none transition-colors" aria-label="Toggle Theme">
+                        <i class="fa-solid fa-circle-half-stroke text-lg"></i>
                     </button>
+                    
+                    <button id="lang-toggle" class="text-xs font-semibold uppercase tracking-wider text-text-muted-light dark:text-text-muted-dark hover:text-text-main-light dark:hover:text-text-main-dark focus:outline-none transition-colors" aria-label="Toggle language">
+                        FR/EN
+                    </button>
+
+                    <div class="md:hidden">
+                        <button id="mobile-menu-button" class="focus:outline-none" aria-label="Open main menu">
+                            <i class="fa-solid fa-bars text-xl"></i>
+                        </button>
+                    </div>
                 </div>
             </nav>
         </div>
-        <div id="mobile-menu" class="hidden md:hidden">
-            <ul class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <li><a href="index.html#about" class="block py-2 px-3 text-base font-medium text-gray-300 rounded-md hover:text-white hover:bg-gray-700" data-lang-en="About" data-lang-fr="À propos">About</a></li>
-                <li><a href="blog.html" class="block py-2 px-3 text-base font-medium text-gray-300 rounded-md hover:text-white hover:bg-gray-700" data-lang-en="Insights" data-lang-fr="Réflexions">Insights</a></li>
-                <li><a href="art-ai.html" class="block py-2 px-3 text-base font-medium text-gray-300 rounded-md hover:text-white hover:bg-gray-700" data-lang-en="Art & AI" data-lang-fr="Art & IA">Art & AI</a></li>
-                <li><a href="index.html#contact" class="block py-2 px-3 text-base font-medium text-gray-300 rounded-md hover:text-white hover:bg-gray-700" data-lang-en="Contact" data-lang-fr="Contact">Contact</a></li>
+        <div id="mobile-menu" class="hidden md:hidden bg-base-light dark:bg-base-dark border-t border-border-light dark:border-border-dark">
+            <ul class="px-4 py-4 space-y-4">
+                <li><a href="index.html#about" class="block text-base font-medium hover:text-indigo-500" data-lang-en="About" data-lang-fr="À propos">About</a></li>
+                <li><a href="blog.html" class="block text-base font-medium hover:text-indigo-500" data-lang-en="Insights" data-lang-fr="Réflexions">Insights</a></li>
+                <li><a href="art-ai.html" class="block text-base font-medium hover:text-indigo-500" data-lang-en="Art & AI" data-lang-fr="Art & IA">Art & AI</a></li>
+                <li><a href="index.html#contact" class="block text-base font-medium hover:text-indigo-500" data-lang-en="Contact" data-lang-fr="Contact">Contact</a></li>
             </ul>
         </div>
     </header>
@@ -61,8 +105,8 @@
         </section>
     </main>
 
-    <footer class="bg-gray-800 py-6">
-        <div class="container mx-auto px-4 text-center text-gray-400">
+    <footer class="bg-card-light dark:bg-card-dark py-6 border-t border-border-light dark:border-border-dark">
+        <div class="container mx-auto px-4 text-center text-text-muted-light dark:text-text-muted-dark">
             <p>Built with 💜 by Julia Yossa</p>
         </div>
     </footer>

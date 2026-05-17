@@ -10,6 +10,36 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        base: { light: '#F4F1EA', dark: '#141414' },
+                        card: { light: '#FFFFFF', dark: '#1C1C1C' },
+                        text: {
+                            main: { light: '#1C1C1C', dark: '#EDEDED' },
+                            muted: { light: '#6B6B6B', dark: '#A3A3A3' }
+                        },
+                        border: { light: '#E5E0D8', dark: '#2E2E2E' }
+                    }
+                }
+            }
+        }
+    </script>
+    <script>
+        (function() {
+            const hour = new Date().getHours();
+            const isDay = hour >= 6 && hour < 20;
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark' || (!savedTheme && !isDay)) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        })();
+    </script>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-KWEQCJP536"></script>
     <script>
@@ -21,58 +51,46 @@
     </script>
 </head>
 
-<body class="bg-gray-900 text-white font-sans">
+<body class="bg-base-light dark:bg-base-dark text-text-main-light dark:text-text-main-dark font-sans corner-flowers-bg">
 
-    <header class="bg-gray-900/70 backdrop-blur-lg fixed top-0 left-0 right-0 z-10">
+    <header class="bg-base-light/80 dark:bg-base-dark/80 backdrop-blur-lg fixed top-0 left-0 right-0 z-50 border-b border-border-light dark:border-border-dark">
         <div class="container mx-auto px-4">
-            <nav class="flex items-center justify-between h-20" role="navigation" aria-label="Main">
-                <button id="lang-toggle"
-                    class="bg-gray-800 text-indigo-400 py-2 px-4 rounded-full text-sm font-semibold focus:outline-none"
-                    aria-label="Toggle language between English and French">
-                    Français / English
-                </button>
-                <a href="#home" class="text-2xl font-bold ml-4">JY</a>
-
-                <!-- Desktop Menu -->
-                <ul class="hidden md:flex space-x-8 ml-auto">
-                    <li><a href="#about" class="hover:text-indigo-400 transition-colors" data-lang-en="About"
-                            data-lang-fr="À propos">About</a></li>
-                    <li><a href="blog.html" class="hover:text-indigo-400 transition-colors" data-lang-en="Insights"
-                            data-lang-fr="Réflexions">Insights</a></li>
-                    <li><a href="art-ai.html" class="hover:text-indigo-400 transition-colors" data-lang-en="Art & AI"
-                            data-lang-fr="Art & IA">Art & AI</a></li>
-                    <li><a href="#contact" class="hover:text-indigo-400 transition-colors" data-lang-en="Contact"
-                            data-lang-fr="Contact">Contact</a></li>
+            <nav class="flex items-center justify-between h-16" role="navigation" aria-label="Main">
+                <div class="flex items-center space-x-4">
+                    <a href="#home" class="text-xl font-bold tracking-tight">JY</a>
+                    <span id="live-clock" class="text-sm font-mono text-text-muted-light dark:text-text-muted-dark tabular-nums tracking-wider opacity-70">00:00:00</span>
+                </div>
+                
+                <ul class="hidden md:flex space-x-8 ml-auto text-sm font-medium">
+                    <li><a href="#about" class="hover:text-indigo-500 dark:hover:text-indigo-400 transition-colors" data-lang-en="About" data-lang-fr="À propos">About</a></li>
+                    <li><a href="blog.html" class="hover:text-indigo-500 dark:hover:text-indigo-400 transition-colors" data-lang-en="Insights" data-lang-fr="Réflexions">Insights</a></li>
+                    <li><a href="art-ai.html" class="hover:text-indigo-500 dark:hover:text-indigo-400 transition-colors" data-lang-en="Art & AI" data-lang-fr="Art & IA">Art & AI</a></li>
+                    <li><a href="#contact" class="hover:text-indigo-500 dark:hover:text-indigo-400 transition-colors" data-lang-en="Contact" data-lang-fr="Contact">Contact</a></li>
                 </ul>
 
-                <!-- Mobile Menu Button -->
-                <div class="md:hidden ml-auto">
-                    <button id="mobile-menu-button" class="text-white focus:outline-none" aria-label="Open main menu">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M4 6h16M4 12h16m-4 6h16"></path>
-                        </svg>
+                <div class="flex items-center space-x-4 ml-8">
+                    <button id="theme-toggle" class="text-text-muted-light dark:text-text-muted-dark hover:text-text-main-light dark:hover:text-text-main-dark focus:outline-none transition-colors" aria-label="Toggle Theme">
+                        <i class="fa-solid fa-circle-half-stroke text-lg"></i>
                     </button>
+                    
+                    <button id="lang-toggle" class="text-xs font-semibold uppercase tracking-wider text-text-muted-light dark:text-text-muted-dark hover:text-text-main-light dark:hover:text-text-main-dark focus:outline-none transition-colors" aria-label="Toggle language">
+                        FR/EN
+                    </button>
+
+                    <div class="md:hidden">
+                        <button id="mobile-menu-button" class="focus:outline-none" aria-label="Open main menu">
+                            <i class="fa-solid fa-bars text-xl"></i>
+                        </button>
+                    </div>
                 </div>
             </nav>
         </div>
-
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden">
-            <ul class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <li><a href="#about"
-                        class="block py-2 px-3 text-base font-medium text-gray-300 rounded-md hover:text-white hover:bg-gray-700"
-                        data-lang-en="About" data-lang-fr="À propos">About</a></li>
-                <li><a href="blog.html"
-                        class="block py-2 px-3 text-base font-medium text-gray-300 rounded-md hover:text-white hover:bg-gray-700"
-                        data-lang-en="Insights" data-lang-fr="Réflexions">Insights</a></li>
-                <li><a href="art-ai.html"
-                        class="block py-2 px-3 text-base font-medium text-gray-300 rounded-md hover:text-white hover:bg-gray-700"
-                        data-lang-en="Art & AI" data-lang-fr="Art & IA">Art & AI</a></li>
-                <li><a href="#contact"
-                        class="block py-2 px-3 text-base font-medium text-gray-300 rounded-md hover:text-white hover:bg-gray-700"
-                        data-lang-en="Contact" data-lang-fr="Contact">Contact</a></li>
+        <div id="mobile-menu" class="hidden md:hidden bg-base-light dark:bg-base-dark border-t border-border-light dark:border-border-dark">
+            <ul class="px-4 py-4 space-y-4">
+                <li><a href="#about" class="block text-base font-medium hover:text-indigo-500" data-lang-en="About" data-lang-fr="À propos">About</a></li>
+                <li><a href="blog.html" class="block text-base font-medium hover:text-indigo-500" data-lang-en="Insights" data-lang-fr="Réflexions">Insights</a></li>
+                <li><a href="art-ai.html" class="block text-base font-medium hover:text-indigo-500" data-lang-en="Art & AI" data-lang-fr="Art & IA">Art & AI</a></li>
+                <li><a href="#contact" class="block text-base font-medium hover:text-indigo-500" data-lang-en="Contact" data-lang-fr="Contact">Contact</a></li>
             </ul>
         </div>
     </header>
@@ -93,22 +111,22 @@
                     <h2 class="text-4xl font-bold mb-6" data-lang-en="About Me" data-lang-fr="À Propos de Moi">About Me
                     </h2>
 
-                    <div id="about-en" class="text-lg text-gray-400 space-y-6 text-left">
+                    <div id="about-en" class="text-lg text-text-muted-light dark:text-text-muted-dark space-y-6 text-left">
                         <div class="flex items-center gap-4">
                             <div
-                                class="w-12 h-12 rounded-full bg-lime-50 text-lime-900 font-semibold flex items-center justify-center">
+                                class="w-12 h-12 rounded-full bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 font-semibold flex items-center justify-center">
                                 J</div>
                             <div>
-                                <p class="text-xs uppercase tracking-[0.3em] text-gray-500">About Me</p>
-                                <h3 class="text-3xl font-semibold text-white">Julia</h3>
+                                <p class="text-xs uppercase tracking-[0.3em] text-text-muted-light dark:text-text-muted-dark">About Me</p>
+                                <h3 class="text-3xl font-semibold text-text-main-light dark:text-text-main-dark">Julia</h3>
                             </div>
                         </div>
-                        <p class="text-3xl font-serif italic text-gray-200">Making technology feel human</p>
+                        <p class="text-3xl font-serif italic text-text-main-light dark:text-text-main-dark">Making technology feel human</p>
                         <p>I've spent over five years on the technical side of digital infrastructure, securing Linux
                             environments, automating workflows with Python, and designing systems that hold up under
                             pressure. The part I care about most is not the code. It's what the code makes possible for
                             the people using it.</p>
-                        <hr class="border-gray-800">
+                        <hr class="border-border-light dark:border-border-dark">
                         <p>Security, to me, is not about restriction. A well designed firewall is a welcome gate for the
                             people who belong and a quiet, firm boundary for those who do not. A well built system does
                             not demand that users adapt to it. It disappears into the background and lets them focus on
@@ -116,36 +134,36 @@
                         <p>The thread running through everything I do: translating the complex language of systems and
                             security into something clear, useful, and grounded in how people actually work and live.
                         </p>
-                        <hr class="border-gray-800">
+                        <hr class="border-border-light dark:border-border-dark">
                         <p>This site is where I share that thinking, practical insights, honest reflections, and
                             resources built around the idea that a secure digital world should be understandable.</p>
-                        <div class="flex flex-wrap gap-3 text-sm text-gray-300">
-                            <span class="px-4 py-2 rounded-xl border border-gray-800">Cybersecurity</span>
-                            <span class="px-4 py-2 rounded-xl border border-gray-800">Linux</span>
-                            <span class="px-4 py-2 rounded-xl border border-gray-800">Python</span>
-                            <span class="px-4 py-2 rounded-xl border border-gray-800">Systems design</span>
-                            <span class="px-4 py-2 rounded-xl border border-gray-800">Risk modelling</span>
-                            <span class="px-4 py-2 rounded-xl border border-gray-800">Digital accessibility</span>
+                        <div class="flex flex-wrap gap-3 text-sm text-text-muted-light dark:text-text-muted-dark">
+                            <span class="px-4 py-2 rounded-xl border border-border-light dark:border-border-dark">Cybersecurity</span>
+                            <span class="px-4 py-2 rounded-xl border border-border-light dark:border-border-dark">Linux</span>
+                            <span class="px-4 py-2 rounded-xl border border-border-light dark:border-border-dark">Python</span>
+                            <span class="px-4 py-2 rounded-xl border border-border-light dark:border-border-dark">Systems design</span>
+                            <span class="px-4 py-2 rounded-xl border border-border-light dark:border-border-dark">Risk modelling</span>
+                            <span class="px-4 py-2 rounded-xl border border-border-light dark:border-border-dark">Digital accessibility</span>
                         </div>
                     </div>
 
-                    <div id="about-fr" class="hidden text-lg text-gray-400 space-y-6 text-left">
+                    <div id="about-fr" class="hidden text-lg text-text-muted-light dark:text-text-muted-dark space-y-6 text-left">
                         <div class="flex items-center gap-4">
                             <div
-                                class="w-12 h-12 rounded-full bg-lime-50 text-lime-900 font-semibold flex items-center justify-center">
+                                class="w-12 h-12 rounded-full bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 font-semibold flex items-center justify-center">
                                 J</div>
                             <div>
-                                <p class="text-xs uppercase tracking-[0.3em] text-gray-500">À propos</p>
-                                <h3 class="text-3xl font-semibold text-white">Julia</h3>
+                                <p class="text-xs uppercase tracking-[0.3em] text-text-muted-light dark:text-text-muted-dark">À propos</p>
+                                <h3 class="text-3xl font-semibold text-text-main-light dark:text-text-main-dark">Julia</h3>
                             </div>
                         </div>
-                        <p class="text-3xl font-serif italic text-gray-200">Rendre la technologie plus humaine</p>
+                        <p class="text-3xl font-serif italic text-text-main-light dark:text-text-main-dark">Rendre la technologie plus humaine</p>
                         <p>Depuis plus de cinq ans, j'évolue dans le versant technique de l'infrastructure numerique, en
                             securisant des environnements Linux, en automatisant des flux de travail avec Python et en
                             concevant des systemes capables de tenir sous pression. Mais ce qui compte le plus pour moi,
                             ce n'est pas le code. C'est ce que le code rend possible pour les personnes qui l'utilisent.
                         </p>
-                        <hr class="border-gray-800">
+                        <hr class="border-border-light dark:border-border-dark">
                         <p>La securite, pour moi, ne consiste pas a restreindre. Un pare feu bien pense est une porte
                             accueillante pour les bonnes personnes et une limite calme mais ferme pour celles qui n'ont
                             pas a entrer. Un systeme bien concu n'oblige pas les utilisateurs a s'adapter a lui. Il
@@ -153,105 +171,105 @@
                         <p>C'est le fil conducteur de tout ce que je fais : traduire le langage complexe des systemes et
                             de la securite en quelque chose de clair, d'utile et d'ancre dans la maniere dont les gens
                             travaillent et vivent reellement.</p>
-                        <hr class="border-gray-800">
+                        <hr class="border-border-light dark:border-border-dark">
                         <p>Ce site est l'endroit ou je partage cette vision, des reflexions concretes, des retours
                             honnetes et des ressources construites autour d'une idee simple : un monde numerique plus
                             sur devrait aussi etre un monde plus facile a comprendre.</p>
-                        <div class="flex flex-wrap gap-3 text-sm text-gray-300">
-                            <span class="px-4 py-2 rounded-xl border border-gray-800">Cybersecurite</span>
-                            <span class="px-4 py-2 rounded-xl border border-gray-800">Linux</span>
-                            <span class="px-4 py-2 rounded-xl border border-gray-800">Python</span>
-                            <span class="px-4 py-2 rounded-xl border border-gray-800">Conception systeme</span>
-                            <span class="px-4 py-2 rounded-xl border border-gray-800">Modelisation du risque</span>
-                            <span class="px-4 py-2 rounded-xl border border-gray-800">Accessibilite numerique</span>
+                        <div class="flex flex-wrap gap-3 text-sm text-text-muted-light dark:text-text-muted-dark">
+                            <span class="px-4 py-2 rounded-xl border border-border-light dark:border-border-dark">Cybersecurite</span>
+                            <span class="px-4 py-2 rounded-xl border border-border-light dark:border-border-dark">Linux</span>
+                            <span class="px-4 py-2 rounded-xl border border-border-light dark:border-border-dark">Python</span>
+                            <span class="px-4 py-2 rounded-xl border border-border-light dark:border-border-dark">Conception systeme</span>
+                            <span class="px-4 py-2 rounded-xl border border-border-light dark:border-border-dark">Modelisation du risque</span>
+                            <span class="px-4 py-2 rounded-xl border border-border-light dark:border-border-dark">Accessibilite numerique</span>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="skills" class="py-20 bg-gray-800">
+        <section id="skills" class="py-20 bg-card-light dark:bg-card-dark border-y border-border-light dark:border-border-dark">
             <div class="container mx-auto px-4">
                 <h2 class="text-4xl font-bold text-center mb-12" data-lang-en="Skills & Tech Stack"
                     data-lang-fr="Compétences & Technologies">Skills & Tech Stack</h2>
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 max-w-6xl mx-auto">
 
-                    <div class="flex flex-col items-center text-center p-4 bg-gray-900 rounded-lg shadow-lg">
+                    <div class="flex flex-col items-center text-center p-4 bg-base-light dark:bg-base-dark border border-border-light dark:border-border-dark rounded-lg shadow-lg">
                         <i class="fas fa-network-wired fa-2x text-indigo-400 mb-3"></i>
                         <h3 class="text-lg font-bold mb-2" data-lang-en="Network & Configuration Management"
                             data-lang-fr="Gestion Réseau & Configuration">Network & Configuration Management</h3>
-                        <p class="text-xs text-gray-400" data-lang-en="LAN/WAN, VLANs, firewalls, pfSense, Group Policy"
+                        <p class="text-xs text-text-muted-light dark:text-text-muted-dark" data-lang-en="LAN/WAN, VLANs, firewalls, pfSense, Group Policy"
                             data-lang-fr="LAN/WAN, VLANs, pare-feu, pfSense, Group Policy">LAN/WAN, VLANs, firewalls,
                             pfSense, Group Policy</p>
                     </div>
-                    <div class="flex flex-col items-center text-center p-4 bg-gray-900 rounded-lg shadow-lg">
+                    <div class="flex flex-col items-center text-center p-4 bg-base-light dark:bg-base-dark border border-border-light dark:border-border-dark rounded-lg shadow-lg">
                         <i class="fas fa-server fa-2x text-indigo-400 mb-3"></i>
                         <h3 class="text-lg font-bold mb-2" data-lang-en="Virtualization & Containerization"
                             data-lang-fr="Virtualisation & Conteneurisation">Virtualization & Containerization</h3>
-                        <p class="text-xs text-gray-400" data-lang-en="Proxmox, VMware, Docker"
+                        <p class="text-xs text-text-muted-light dark:text-text-muted-dark" data-lang-en="Proxmox, VMware, Docker"
                             data-lang-fr="Proxmox, VMware, Docker">Proxmox, VMware, Docker</p>
                     </div>
-                    <div class="flex flex-col items-center text-center p-4 bg-gray-900 rounded-lg shadow-lg">
+                    <div class="flex flex-col items-center text-center p-4 bg-base-light dark:bg-base-dark border border-border-light dark:border-border-dark rounded-lg shadow-lg">
                         <i class="fas fa-cloud fa-2x text-indigo-400 mb-3"></i>
                         <h3 class="text-lg font-bold mb-2" data-lang-en="Cloud Infrastructure Management"
                             data-lang-fr="Gestion d'Infrastructure Cloud">Cloud Infrastructure Management</h3>
-                        <p class="text-xs text-gray-400" data-lang-en="Azure, AWS, GCP" data-lang-fr="Azure, AWS, GCP">
+                        <p class="text-xs text-text-muted-light dark:text-text-muted-dark" data-lang-en="Azure, AWS, GCP" data-lang-fr="Azure, AWS, GCP">
                             Azure, AWS, GCP</p>
                     </div>
-                    <div class="flex flex-col items-center text-center p-4 bg-gray-900 rounded-lg shadow-lg">
+                    <div class="flex flex-col items-center text-center p-4 bg-base-light dark:bg-base-dark border border-border-light dark:border-border-dark rounded-lg shadow-lg">
                         <i class="fas fa-chart-pie fa-2x text-indigo-400 mb-3"></i>
                         <h3 class="text-lg font-bold mb-2" data-lang-en="Data Analysis"
                             data-lang-fr="Analyse de Données">Data Analysis</h3>
-                        <p class="text-xs text-gray-400"
+                        <p class="text-xs text-text-muted-light dark:text-text-muted-dark"
                             data-lang-en="Tensorflow, Matlab, Apache Spark, PowerBI, Tableau, Excel"
                             data-lang-fr="Tensorflow, Matlab, Apache Spark, PowerBI, Tableau, Excel">Tensorflow, Matlab,
                             Apache Spark, PowerBI, Tableau, Excel</p>
                     </div>
-                    <div class="flex flex-col items-center text-center p-4 bg-gray-900 rounded-lg shadow-lg">
+                    <div class="flex flex-col items-center text-center p-4 bg-base-light dark:bg-base-dark border border-border-light dark:border-border-dark rounded-lg shadow-lg">
                         <i class="fas fa-cogs fa-2x text-indigo-400 mb-3"></i>
                         <h3 class="text-lg font-bold mb-2" data-lang-en="Infrastructure Automation"
                             data-lang-fr="Automatisation d'Infrastructure">Infrastructure Automation</h3>
-                        <p class="text-xs text-gray-400" data-lang-en="Ansible, Terraform, Bash/Python scripting"
+                        <p class="text-xs text-text-muted-light dark:text-text-muted-dark" data-lang-en="Ansible, Terraform, Bash/Python scripting"
                             data-lang-fr="Ansible, Terraform, Scripting Bash/Python">Ansible, Terraform, Bash/Python
                             scripting</p>
                     </div>
-                    <div class="flex flex-col items-center text-center p-4 bg-gray-900 rounded-lg shadow-lg">
+                    <div class="flex flex-col items-center text-center p-4 bg-base-light dark:bg-base-dark border border-border-light dark:border-border-dark rounded-lg shadow-lg">
                         <i class="fas fa-shield-alt fa-2x text-indigo-400 mb-3"></i>
                         <h3 class="text-lg font-bold mb-2" data-lang-en="Cybersecurity" data-lang-fr="Cybersécurité">
                             Cybersecurity</h3>
-                        <p class="text-xs text-gray-400"
+                        <p class="text-xs text-text-muted-light dark:text-text-muted-dark"
                             data-lang-en="Security Hardening, Patch Management, EDR, SOC, SIEM, Zero Trust Architecture, Network Segmentation"
                             data-lang-fr="Durcissement de la Sécurité, Gestion des Correctifs, EDR, SOC, SIEM, Architecture Zero Trust, Segmentation Réseau">
                             Security Hardening, Patch Management, EDR, SOC, SIEM, Zero Trust Architecture, Network
                             Segmentation</p>
                     </div>
-                    <div class="flex flex-col items-center text-center p-4 bg-gray-900 rounded-lg shadow-lg">
+                    <div class="flex flex-col items-center text-center p-4 bg-base-light dark:bg-base-dark border border-border-light dark:border-border-dark rounded-lg shadow-lg">
                         <i class="fas fa-database fa-2x text-indigo-400 mb-3"></i>
                         <h3 class="text-lg font-bold mb-2" data-lang-en="Backup & Disaster Recovery"
                             data-lang-fr="Sauvegarde & Reprise après Sinistre">Backup & Disaster Recovery</h3>
-                        <p class="text-xs text-gray-400" data-lang-en="Planning and implementation"
+                        <p class="text-xs text-text-muted-light dark:text-text-muted-dark" data-lang-en="Planning and implementation"
                             data-lang-fr="Planification et mise en œuvre">Planning and implementation</p>
                     </div>
-                    <div class="flex flex-col items-center text-center p-4 bg-gray-900 rounded-lg shadow-lg">
+                    <div class="flex flex-col items-center text-center p-4 bg-base-light dark:bg-base-dark border border-border-light dark:border-border-dark rounded-lg shadow-lg">
                         <i class="fas fa-id-card fa-2x text-indigo-400 mb-3"></i>
                         <h3 class="text-lg font-bold mb-2" data-lang-en="Identity & Access Management"
                             data-lang-fr="Gestion des Identités et des Accès">Identity & Access Management</h3>
-                        <p class="text-xs text-gray-400" data-lang-en="LDAP, Active Directory, MFA"
+                        <p class="text-xs text-text-muted-light dark:text-text-muted-dark" data-lang-en="LDAP, Active Directory, MFA"
                             data-lang-fr="LDAP, Active Directory, MFA">LDAP, Active Directory, MFA</p>
                     </div>
-                    <div class="flex flex-col items-center text-center p-4 bg-gray-900 rounded-lg shadow-lg">
+                    <div class="flex flex-col items-center text-center p-4 bg-base-light dark:bg-base-dark border border-border-light dark:border-border-dark rounded-lg shadow-lg">
                         <i class="fas fa-chart-bar fa-2x text-indigo-400 mb-3"></i>
                         <h3 class="text-lg font-bold mb-2" data-lang-en="Business Analysis"
                             data-lang-fr="Analyse d'affaires">Business Analysis</h3>
-                        <p class="text-xs text-gray-400" data-lang-en="Requirements gathering, process optimization"
+                        <p class="text-xs text-text-muted-light dark:text-text-muted-dark" data-lang-en="Requirements gathering, process optimization"
                             data-lang-fr="Collecte des exigences, optimisation des processus">Requirements gathering,
                             process optimization</p>
                     </div>
-                    <div class="flex flex-col items-center text-center p-4 bg-gray-900 rounded-lg shadow-lg">
+                    <div class="flex flex-col items-center text-center p-4 bg-base-light dark:bg-base-dark border border-border-light dark:border-border-dark rounded-lg shadow-lg">
                         <i class="fas fa-project-diagram fa-2x text-indigo-400 mb-3"></i>
                         <h3 class="text-lg font-bold mb-2" data-lang-en="Project Management"
                             data-lang-fr="Gestion de Projet">Project Management</h3>
-                        <p class="text-xs text-gray-400" data-lang-en="Agile, Scrum, Waterfall methodologies"
+                        <p class="text-xs text-text-muted-light dark:text-text-muted-dark" data-lang-en="Agile, Scrum, Waterfall methodologies"
                             data-lang-fr="Méthodologies Agile, Scrum, Waterfall">Agile, Scrum, Waterfall methodologies
                         </p>
                     </div>
@@ -260,14 +278,14 @@
             </div>
         </section>
 
-        <section id="blog" class="py-20 bg-gray-800">
+        <section id="blog" class="py-20 bg-base-light dark:bg-base-dark">
             <div class="container mx-auto px-4">
                 <h2 class="text-4xl font-bold text-center mb-12" data-lang-en="Insights" data-lang-fr="Réflexions">
                     Insights</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 
                     <!-- Blog Post 1 -->
-                    <div class="bg-gray-900 rounded-lg overflow-hidden shadow-lg"
+                    <div class="bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark rounded-lg overflow-hidden shadow-lg transition-shadow hover:shadow-xl"
                         data-full-content-en="<p class='mb-4'>Zero Trust is a modern security model based on the idea that no user or device should be trusted by default—even inside the network. Every access request must be verified, and systems are designed as if a breach has already occurred.</p><h3 class='text-xl font-bold mb-3'>🔑 Core Principles</h3><ul class='list-disc list-inside mb-4 space-y-2'><li>Verify explicitly: Always authenticate and authorize based on identity and context</li><li>Least privilege: Limit access to only what’s needed</li><li>Assume breach: Monitor continuously and segment systems</li></ul><h3 class='text-xl font-bold mb-3'>🛠️ Tools That Support It</h3><p class='mb-4'>MFA, RBAC, microsegmentation, endpoint compliance, SIEM, and encryption.</p><h3 class='text-xl font-bold mb-3'>🌐 Why It Matters</h3><p class='mb-4'>Zero Trust helps reduce risk, protect hybrid environments, and meet compliance standards.</p><h3 class='text-xl font-bold mb-3'>🧭 My Approach</h3><ul class='list-disc list-inside space-y-2'><li>Designing secure access policies that reflect real-world risks</li><li>Segmenting networks with pfSense and Proxmox to limit exposure</li><li>Leading training workshops that teach users to recognize and respond to threats</li><li>Building risk models that assume breach and prioritize resilience</li></ul>"
                         data-full-content-fr="<p class='mb-4'>Le Zero Trust est un modèle de sécurité moderne basé sur l'idée qu'aucun utilisateur ou appareil ne doit être approuvé par défaut, même à l'intérieur du réseau. Chaque demande d'accès doit être vérifiée, et les systèmes sont conçus comme si une violation s'était déjà produite.</p><h3 class='text-xl font-bold mb-3'>🔑 Principes Fondamentaux</h3><ul class='list-disc list-inside mb-4 space-y-2'><li>Vérifier explicitement : Toujours authentifier et autoriser en fonction de l'identité et du contexte</li><li>Moindre privilège : Limiter l'accès à ce qui est strictement nécessaire</li><li>Présumer la violation : Surveiller en permanence et segmenter les systèmes</li></ul><h3 class='text-xl font-bold mb-3'>🛠️ Outils de Support</h3><p class='mb-4'>MFA, RBAC, micro-segmentation, conformité des terminaux, SIEM et chiffrement.</p><h3 class='text-xl font-bold mb-3'>🌐 Pourquoi C'est Important</h3><p class='mb-4'>Le Zero Trust aide à réduire les risques, à protéger les environnements hybrides et à respecter les normes de conformité.</p><h3 class='text-xl font-bold mb-3'>🧭 Mon Approche</h3><ul class='list-disc list-inside space-y-2'><li>Concevoir des politiques d'accès sécurisé qui reflètent les risques réels</li><li>Segmenter les réseaux avec pfSense et Proxmox pour limiter l'exposition</li><li>Animer des ateliers de formation qui apprennent aux utilisateurs à reconnaître et à réagir aux menaces</li><li>Élaborer des modèles de risque qui supposent la violation et privilégient la résilience</li></ul>">
                         <img src="https://picsum.photos/seed/blog1/600/400" alt="Blog Post 1"
@@ -275,9 +293,9 @@
                         <div class="p-6">
                             <h3 class="text-2xl font-bold mb-2" data-lang-en="Understanding Zero Trust"
                                 data-lang-fr="Comprendre le Zero Trust">Understanding Zero Trust</h3>
-                            <p class="text-sm text-gray-400 mb-2" data-lang-en="Published on November 8, 2025"
+                            <p class="text-sm text-text-muted-light dark:text-text-muted-dark mb-2" data-lang-en="Published on November 8, 2025"
                                 data-lang-fr="Publié le 8 novembre 2025">Published on November 8, 2025</p>
-                            <p class="text-gray-400 text-sm mb-4"
+                            <p class="text-text-muted-light dark:text-text-muted-dark text-sm mb-4"
                                 data-lang-en="A quick look at why Zero Trust matters in cybersecurity."
                                 data-lang-fr="Un aperçu rapide de l'importance du Zero Trust en cybersécurité.">A quick
                                 look at why Zero Trust matters in cybersecurity.</p>
@@ -288,7 +306,7 @@
                     </div>
 
                     <!-- Blog Post 2 -->
-                    <div class="bg-gray-900 rounded-lg overflow-hidden shadow-lg"
+                    <div class="bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark rounded-lg overflow-hidden shadow-lg transition-shadow hover:shadow-xl"
                         data-full-content-en="<p class='mb-4'>Balancing a full-time job with ongoing studies isn’t just a time-management challenge—it’s a test of clarity, motivation, and boundaries. It means learning to prioritize deep work over perfection, and progress over pressure.</p><h3 class='text-xl font-bold mb-3'>🔑 What Helps Me Stay Grounded</h3><ul class='list-disc list-inside mb-4 space-y-2'><li>Structured planning: Weekly overviews and visual task boards keep me focused</li><li>Energy-based scheduling: I match complex tasks with my peak focus hours</li><li>Microlearning: I break study sessions into 25-minute sprints</li><li>Boundaries: I protect my evenings and weekends when I need to recharge</li></ul><h3 class='text-xl font-bold mb-3'>🧭 Why It’s Worth It</h3><p>Every course, every late-night reading, feeds directly into my work—whether it’s refining a policy, leading a workshop, or building a more inclusive digital experience. The overlap isn’t a burden—it’s a bridge.</p>"
                         data-full-content-fr="<p class='mb-4'>Concilier un emploi à temps plein et des études continues n'est pas seulement un défi de gestion du temps, c'est un test de clarté, de motivation et de limites. Cela signifie apprendre à privilégier le travail en profondeur plutôt que la perfection, et le progrès plutôt que la pression.</p><h3 class='text-xl font-bold mb-3'>🔑 Ce Qui M'aide à Rester Ancrée</h3><ul class='list-disc list-inside mb-4 space-y-2'><li>Planification structurée : Des aperçus hebdomadaires et des tableaux de tâches visuels me permettent de rester concentrée</li><li>Planification basée sur l'énergie : J'adapte les tâches complexes à mes heures de concentration maximale</li><li>Micro-apprentissage : Je divise les sessions d'étude en sprints de 25 minutes</li><li>Limites : Je protège mes soirées et mes week-ends lorsque j'ai besoin de me ressourcer</li></ul><h3 class='text-xl font-bold mb-3'>🧭 Pourquoi Ça en Vaut la Peine</h3><p>Chaque cours, chaque lecture tardive, alimente directement mon travail—qu'il s'agisse d'affiner une politique, d'animer un atelier ou de construire une expérience numérique plus inclusive. Le chevauchement n'est pas un fardeau—c'est un pont.</p>">
                         <img src="https://picsum.photos/seed/blog2/600/400" alt="Blog Post 2"
@@ -297,9 +315,9 @@
                             <h3 class="text-2xl font-bold mb-2" data-lang-en="Studying While Working Full Time"
                                 data-lang-fr="Étudier en Travaillant à Temps Plein">Studying While Working Full Time
                             </h3>
-                            <p class="text-sm text-gray-400 mb-2" data-lang-en="Published on November 8, 2025"
+                            <p class="text-sm text-text-muted-light dark:text-text-muted-dark mb-2" data-lang-en="Published on November 8, 2025"
                                 data-lang-fr="Publié le 8 novembre 2025">Published on November 8, 2025</p>
-                            <p class="text-gray-400 text-sm mb-4"
+                            <p class="text-text-muted-light dark:text-text-muted-dark text-sm mb-4"
                                 data-lang-en="A reflection on navigating dual commitments with purpose and resilience."
                                 data-lang-fr="Une réflexion sur la gestion des doubles engagements avec détermination et résilience.">
                                 A reflection on navigating dual commitments with purpose and resilience.</p>
@@ -310,7 +328,7 @@
                     </div>
 
                     <!-- Blog Post 3 -->
-                    <div class="bg-gray-900 rounded-lg overflow-hidden shadow-lg"
+                    <div class="bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark rounded-lg overflow-hidden shadow-lg transition-shadow hover:shadow-xl"
                         data-full-content-en="<h3 class='text-2xl font-bold mb-3'>🤖 The Role of AI in Cybersecurity</h3><p class='mb-4'>AI and Machine Learning (ML) are transforming cybersecurity by enabling systems to detect threats faster and more accurately. Instead of relying solely on predefined rules, ML models learn from patterns—spotting anomalies like unusual login times or data transfers that might signal an attack.</p><h3 class='text-2xl font-bold mb-3'>🧠 Smarter Threat Detection</h3><p class='mb-4'>AI and Machine Learning (ML) are transforming cybersecurity by enabling systems to detect threats faster and more accurately. Instead of relying solely on predefined rules, ML models learn from patterns—spotting anomalies like unusual login times or data transfers that might signal an attack.</p><h3 class='text-2xl font-bold mb-3'>🔄 Real-Time Response</h3><p class='mb-4'>AI-powered tools can automate responses to threats, such as isolating compromised devices or blocking malicious traffic. This reduces reaction time and limits damage, especially in large or distributed networks.</p><h3 class='text-2xl font-bold mb-3'>🧩 Adaptive Defense</h3><p class='mb-4'>Unlike static firewalls, AI systems evolve. They adapt to new attack vectors, learn from past incidents, and improve over time—making them ideal for dynamic environments like cloud infrastructure or remote work setups.</p><h3 class='text-2xl font-bold mb-3'>🧭 My Perspective</h3><p>In my work, I integrate AI principles into risk modeling and user training. Whether it’s teaching teams to recognize phishing patterns or using anomaly detection to secure virtual environments, I see AI as a powerful ally—not a replacement—for human expertise.</p>"
                         data-full-content-fr="<h3 class='text-2xl font-bold mb-3'>🤖 Le Rôle de l'IA en Cybersécurité</h3><p class='mb-4'>L'IA et l'apprentissage automatique (ML) transforment la cybersécurité en permettant aux systèmes de détecter les menaces plus rapidement et avec plus de précision. Au lieu de se fier uniquement à des règles prédéfinies, les modèles ML apprennent des modèles, repérant les anomalies comme les heures de connexion inhabituelles ou les transferts de données qui pourraient signaler une attaque.</p><h3 class='text-2xl font-bold mb-3'>🧠 Détection Intelligente des Menaces</h3><p class='mb-4'>L'IA et l'apprentissage automatique (ML) transforment la cybersécurité en permettant aux systèmes de détecter les menaces plus rapidement et avec plus de précision. Au lieu de se fier uniquement à des règles prédéfinies, les modèles ML apprennent des modèles, repérant les anomalies comme les heures de connexion inhabituelles ou les transferts de données qui pourraient signaler une attaque.</p><h3 class='text-2xl font-bold mb-3'>🔄 Réponse en Temps Réel</h3><p class='mb-4'>Les outils basés sur l'IA peuvent automatiser les réponses aux menaces, telles que l'isolement des appareils compromis ou le blocage du trafic malveillant. Cela réduit le temps de réaction et limite les dommages, en particulier dans les réseaux étendus ou distribués.</p><h3 class='text-2xl font-bold mb-3'>🧩 Défense Adaptative</h3><p class='mb-4'>Contrairement aux pare-feu statiques, les systèmes d'IA évoluent. Ils s'adaptent aux nouveaux vecteurs d'attaque, apprennent des incidents passés et s'améliorent avec le temps, ce qui les rend idéaux pour les environnements dynamiques comme l'infrastructure cloud ou les configurations de travail à distance.</p><h3 class='text-2xl font-bold mb-3'>🧭 Ma Perspective</h3><p>Dans mon travail, j'intègre les principes de l'IA dans la modélisation des risques et la formation des utilisateurs. Qu'il s'agisse d'apprendre aux équipes à reconnaître les schémas de phishing ou d'utiliser la détection d'anomalies pour sécuriser les environnements virtuels, je vois l'IA comme un allié puissant, et non un substitut, à l'expertise humaine.</p>">
                         <img src="https://picsum.photos/seed/blog3/600/400" alt="Blog Post 3"
@@ -318,9 +336,9 @@
                         <div class="p-6">
                             <h3 class="text-2xl font-bold mb-2" data-lang-en="The Role of AI in Cybersecurity"
                                 data-lang-fr="Le Rôle de l'IA en Cybersécurité">The Role of AI in Cybersecurity</h3>
-                            <p class="text-sm text-gray-400 mb-2" data-lang-en="Published on October 5, 2025"
+                            <p class="text-sm text-text-muted-light dark:text-text-muted-dark mb-2" data-lang-en="Published on October 5, 2025"
                                 data-lang-fr="Publié le 5 octobre 2025">Published on October 5, 2025</p>
-                            <p class="text-gray-400 text-sm mb-4"
+                            <p class="text-text-muted-light dark:text-text-muted-dark text-sm mb-4"
                                 data-lang-en="Exploring how Artificial Intelligence and Machine Learning are shaping the future of threat detection and response."
                                 data-lang-fr="Explorer comment l'intelligence artificielle et l'apprentissage automatique façonnent l'avenir de la détection et de la réponse aux menaces.">
                                 Exploring how Artificial Intelligence and Machine Learning are shaping the future of
@@ -337,10 +355,10 @@
 
         <!-- Blog Post Modal -->
         <div id="blog-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
-            <div class="bg-gray-800 rounded-lg shadow-xl p-8 max-w-2xl w-full mx-4">
+            <div class="bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark rounded-lg shadow-xl p-8 max-w-2xl w-full mx-4">
                 <h2 id="modal-title" class="text-3xl font-bold mb-4"></h2>
-                <p id="modal-date" class="text-sm text-gray-400 mb-4"></p>
-                <div id="modal-content" class="text-gray-300 space-y-4">
+                <p id="modal-date" class="text-sm text-text-muted-light dark:text-text-muted-dark mb-4"></p>
+                <div id="modal-content" class="text-text-main-light dark:text-text-main-dark space-y-4">
                     <!-- Full blog content will be injected here -->
                 </div>
                 <button id="modal-close-btn"
@@ -355,7 +373,7 @@
                 </h2>
                 <div class="max-w-lg mx-auto">
                     <div class="text-center">
-                        <p class="text-2xl text-gray-300 mb-8" data-lang-en="I am happy to connect"
+                        <p class="text-2xl text-text-main-light dark:text-text-main-dark mb-8" data-lang-en="I am happy to connect"
                             data-lang-fr="Au plaisir d'échanger">I am happy to connect</p>
                         <div class="flex justify-center space-x-8">
                             <a href="https://cm.linkedin.com/in/c-yossa-julia-d" target="_blank"
@@ -375,8 +393,8 @@
         </section>
     </main>
 
-    <footer class="bg-gray-800 py-6">
-        <div class="container mx-auto px-4 text-center text-gray-400">
+    <footer class="bg-card-light dark:bg-card-dark py-6 border-t border-border-light dark:border-border-dark">
+        <div class="container mx-auto px-4 text-center text-text-muted-light dark:text-text-muted-dark">
             <p>Built with 💜 by Julia Yossa</p>
         </div>
     </footer>

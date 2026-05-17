@@ -1,334 +1,587 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Julia Yossa | Creative Tech Bridge</title>
+    <title>Julia Yossa | Art & AI</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="style.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <!-- Google tag (gtag.js) -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-KWEQCJP536"></script>
-        <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-          gtag('config', 'G-KWEQCJP536');
-        </script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        base: {
+                            light: '#F4F1EA',
+                            dark: '#141414'
+                        },
+                        card: {
+                            light: '#FFFFFF',
+                            dark: '#1C1C1C'
+                        },
+                        text: {
+                            main: {
+                                light: '#1C1C1C',
+                                dark: '#EDEDED'
+                            },
+                            muted: {
+                                light: '#6B6B6B',
+                                dark: '#A3A3A3'
+                            }
+                        },
+                        border: {
+                            light: '#E5E0D8',
+                            dark: '#2E2E2E'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Smooth transitions for theme switching */
+        body,
+        nav,
+        .card,
+        h1,
+        h2,
+        h3,
+        p,
+        a,
+        button,
+        header,
+        footer {
+            transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease;
+        }
+
+        /* Auto-run theme check to avoid flash */
+        .theme-script {
+            display: none;
+        }
+    </style>
+    <script>
+            // Set theme immediately to avoid flash
+            (function () {
+                const hour = new Date().getHours();
+                const isDay = hour >= 6 && hour < 20;
+                const savedTheme = localStorage.getItem('theme');
+                if (savedTheme === 'dark' || (!savedTheme && !isDay)) {
+                    document.documentElement.classList.add('dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                }
+            })();
+    </script>
 </head>
-<body class="bg-gray-900 text-white font-sans">
-    <header class="bg-gray-900/70 backdrop-blur-lg fixed top-0 left-0 right-0 z-10">
+
+<body
+    class="bg-base-light dark:bg-base-dark text-text-main-light dark:text-text-main-dark font-sans min-h-screen flex flex-col corner-flowers-bg">
+
+    <header
+        class="bg-base-light/80 dark:bg-base-dark/80 backdrop-blur-lg fixed top-0 left-0 right-0 z-50 border-b border-border-light dark:border-border-dark">
         <div class="container mx-auto px-4">
-            <nav class="flex items-center justify-between h-20" role="navigation" aria-label="Main">
-                <button id="lang-toggle" class="bg-gray-800 text-indigo-400 py-2 px-4 rounded-full text-sm font-semibold focus:outline-none" aria-label="Toggle language between English and French">
-                    Français / English
-                </button>
-                <a href="index.html" class="text-2xl font-bold ml-4">JY</a>
-                <ul class="hidden md:flex space-x-8 ml-auto">
-                    <li><a href="index.html#about" class="hover:text-indigo-400 transition-colors" data-lang-en="About" data-lang-fr="À propos">About</a></li>
-                    <li><a href="blog.html" class="hover:text-indigo-400 transition-colors" data-lang-en="Insights" data-lang-fr="Réflexions">Insights</a></li>
-                    <li><a href="art-ai.html" class="hover:text-indigo-400 transition-colors" data-lang-en="Art & AI" data-lang-fr="Art & IA">Art & AI</a></li>
-                    <li><a href="index.html#contact" class="hover:text-indigo-400 transition-colors" data-lang-en="Contact" data-lang-fr="Contact">Contact</a></li>
+            <nav class="flex items-center justify-between h-16" role="navigation" aria-label="Main">
+                <div class="flex items-center space-x-4">
+                    <a href="index.html" class="text-xl font-bold tracking-tight">JY</a>
+                    <!-- Clock component -->
+                    <span id="live-clock"
+                        class="text-sm font-mono text-text-muted-light dark:text-text-muted-dark tabular-nums tracking-wider opacity-70">00:00:00</span>
+                </div>
+
+                <ul class="hidden md:flex space-x-8 ml-auto text-sm font-medium">
+                    <li><a href="index.html#about"
+                            class="hover:text-indigo-500 dark:hover:text-indigo-400 transition-colors"
+                            data-lang-en="About" data-lang-fr="À propos">About</a></li>
+                    <li><a href="blog.html" class="hover:text-indigo-500 dark:hover:text-indigo-400 transition-colors"
+                            data-lang-en="Insights" data-lang-fr="Réflexions">Insights</a></li>
+                    <li><a href="art-ai.html" class="text-indigo-500 dark:text-indigo-400 transition-colors"
+                            data-lang-en="Art & AI" data-lang-fr="Art & IA">Art & AI</a></li>
+                    <li><a href="index.html#contact"
+                            class="hover:text-indigo-500 dark:hover:text-indigo-400 transition-colors"
+                            data-lang-en="Contact" data-lang-fr="Contact">Contact</a></li>
                 </ul>
-                <div class="md:hidden ml-auto">
-                    <button id="mobile-menu-button" class="text-white focus:outline-none" aria-label="Open main menu">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-4 6h16"></path>
-                        </svg>
+
+                <div class="flex items-center space-x-4 ml-8">
+                    <!-- Theme Toggle -->
+                    <button id="theme-toggle"
+                        class="text-text-muted-light dark:text-text-muted-dark hover:text-text-main-light dark:hover:text-text-main-dark focus:outline-none transition-colors"
+                        aria-label="Toggle Theme">
+                        <i class="fa-solid fa-circle-half-stroke text-lg"></i>
                     </button>
+
+                    <button id="lang-toggle"
+                        class="text-xs font-semibold uppercase tracking-wider text-text-muted-light dark:text-text-muted-dark hover:text-text-main-light dark:hover:text-text-main-dark focus:outline-none transition-colors"
+                        aria-label="Toggle language">
+                        FR/EN
+                    </button>
+
+                    <div class="md:hidden">
+                        <button id="mobile-menu-button" class="focus:outline-none" aria-label="Open main menu">
+                            <i class="fa-solid fa-bars text-xl"></i>
+                        </button>
+                    </div>
                 </div>
             </nav>
         </div>
-        <div id="mobile-menu" class="hidden md:hidden">
-            <ul class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <li><a href="index.html#about" class="block py-2 px-3 text-base font-medium text-gray-300 rounded-md hover:text-white hover:bg-gray-700" data-lang-en="About" data-lang-fr="À propos">About</a></li>
-                <li><a href="blog.html" class="block py-2 px-3 text-base font-medium text-gray-300 rounded-md hover:text-white hover:bg-gray-700" data-lang-en="Insights" data-lang-fr="Réflexions">Insights</a></li>
-                <li><a href="art-ai.html" class="block py-2 px-3 text-base font-medium text-gray-300 rounded-md hover:text-white hover:bg-gray-700" data-lang-en="Art & AI" data-lang-fr="Art & IA">Art & AI</a></li>
-                <li><a href="index.html#contact" class="block py-2 px-3 text-base font-medium text-gray-300 rounded-md hover:text-white hover:bg-gray-700" data-lang-en="Contact" data-lang-fr="Contact">Contact</a></li>
+        <div id="mobile-menu"
+            class="hidden md:hidden bg-base-light dark:bg-base-dark border-t border-border-light dark:border-border-dark">
+            <ul class="px-4 py-4 space-y-4">
+                <li><a href="index.html#about" class="block text-base font-medium" data-lang-en="About"
+                        data-lang-fr="À propos">About</a></li>
+                <li><a href="blog.html" class="block text-base font-medium" data-lang-en="Insights"
+                        data-lang-fr="Réflexions">Insights</a></li>
+                <li><a href="art-ai.html" class="block text-base font-medium text-indigo-500" data-lang-en="Art & AI"
+                        data-lang-fr="Art & IA">Art & AI</a></li>
+                <li><a href="index.html#contact" class="block text-base font-medium" data-lang-en="Contact"
+                        data-lang-fr="Contact">Contact</a></li>
             </ul>
         </div>
     </header>
 
-    <main class="pt-20">
-        <section class="py-20">
-            <div class="container mx-auto px-4">
-                <div class="max-w-6xl mx-auto rounded-3xl overflow-hidden border border-gray-800 bg-black shadow-2xl">
-                    <div class="grid lg:grid-cols-[1.1fr_0.9fr] gap-10 px-8 py-12 md:px-12 md:py-16">
-                        <div class="space-y-6">
-                            <p class="text-xs uppercase tracking-[0.35em] text-gray-400" data-lang-en="Art • Code • AI" data-lang-fr="Art • Code • IA">Art • Code • AI</p>
-                            <h1 class="text-4xl md:text-6xl font-bold leading-tight" data-lang-en="A place for sketches, systems, and experiments that turn code into image, rhythm, and texture." data-lang-fr="Un espace pour des esquisses, des systèmes et des expériences où le code devient image, rythme et texture.">A place for sketches, systems, and experiments that turn code into image, rhythm, and texture.</h1>
-                            <p class="text-lg md:text-xl text-gray-300 max-w-2xl" data-lang-en="I wanted this page to feel closer to the work itself: small visual ideas, generative studies, AI-assisted trials, and the kinds of code explorations that start with curiosity more than with a product goal." data-lang-fr="Je voulais que cette page soit plus proche du travail lui-même : de petites idées visuelles, des études génératives, des essais assistés par l'IA, et des explorations de code qui naissent davantage de la curiosité que d'un objectif produit.">I wanted this page to feel closer to the work itself: small visual ideas, generative studies, AI-assisted trials, and the kinds of code explorations that start with curiosity more than with a product goal.</p>
-                            <p class="text-sm uppercase tracking-[0.3em] text-indigo-300" data-lang-en="What code can open in art" data-lang-fr="Ce que le code peut ouvrir dans l'art">What code can do in art</p>
-                            <div class="flex flex-wrap gap-4">
-                                <a href="#repositories" class="inline-flex items-center justify-center border border-gray-600 hover:border-white text-white font-semibold py-3 px-5 rounded-full transition-colors" data-lang-en="Explore the repositories" data-lang-fr="Explorer les dépôts">Explore the repositories</a>
-                                <a href="index.html" class="inline-flex items-center justify-center bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-5 rounded-full transition-colors" data-lang-en="Back to the platform" data-lang-fr="Retour à la plateforme">Back to the platform</a>
-                            </div>
-                        </div>
-                        <div class="art-grid rounded-3xl border border-white/10 p-6 min-h-[320px] flex flex-col justify-between">
-                            <div class="space-y-4">
-                                <div class="flex items-center justify-between text-sm text-gray-200">
-                                    <span data-lang-en="Role" data-lang-fr="Rôle">Role</span>
-                                    <span class="text-indigo-300" data-lang-en="Notebook page" data-lang-fr="Page carnet">Notebook page</span>
-                                </div>
-                                <div class="flex items-center justify-between text-sm text-gray-200">
-                                    <span data-lang-en="Connects" data-lang-fr="Relie">Connects</span>
-                                    <span class="text-emerald-300" data-lang-en="Ideas and experiments" data-lang-fr="Idées et expériences">Ideas and experiments</span>
-                                </div>
-                                <div class="flex items-center justify-between text-sm text-gray-200">
-                                    <span data-lang-en="Focus" data-lang-fr="Focus">Focus</span>
-                                    <span class="text-amber-300" data-lang-en="Creative process" data-lang-fr="Processus créatif">Creative process</span>
-                                </div>
-                            </div>
-                            <div class="space-y-3">
-                                <div class="rounded-2xl border border-white/10 bg-white/5 p-5">
-                                    <p class="text-xs uppercase tracking-[0.25em] text-gray-400 mb-2" data-lang-en="Why this exists" data-lang-fr="Pourquoi cette page existe">Why this exists</p>
-                                    <p class="text-sm text-gray-200" data-lang-en="Some projects begin as a line of code, a strange output, or a prompt worth pushing further. This page gathers that side of the practice." data-lang-fr="Certains projets commencent par une ligne de code, un résultat étrange ou un prompt qu'on a envie de pousser plus loin. Cette page rassemble cette part du travail.">Some projects begin as a line of code, a strange output, or a prompt worth pushing further. This page gathers that side of the practice.</p>
-                                </div>
-                                <div class="grid grid-cols-3 gap-3">
-                                    <div class="h-16 rounded-2xl bg-indigo-400/30"></div>
-                                    <div class="h-16 rounded-2xl bg-emerald-400/30"></div>
-                                    <div class="h-16 rounded-2xl bg-amber-300/30"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+    <main class="flex-grow pt-24 pb-20">
+
+        <!-- Intro Section -->
+        <section class="mb-16">
+            <div class="container mx-auto px-4 max-w-5xl">
+                <div class="py-10">
+                    <h1 class="text-4xl md:text-5xl font-bold tracking-tight mb-6" data-lang-en="Art & AI"
+                        data-lang-fr="Art & IA">Art & AI</h1>
+                    <p class="text-lg md:text-xl text-text-muted-light dark:text-text-muted-dark max-w-3xl leading-relaxed"
+                        data-lang-en="A collection of sketches, systems, and experiments treating code as a fluid material. This space gathers pioneering repositories and portfolios where visual intuition leads, algorithms serve as digital brushes, and computational logic is harnessed to explore motion, geometry, and AI assistance. By bridging the gap between rigid syntax and organic form, these creators redefine the boundaries of the digital canvas."
+                        data-lang-fr="Une collection d'esquisses, de systèmes et d'expériences traitant le code comme une matière fluide. Cet espace rassemble des dépôts et portfolios novateurs où l'intuition visuelle prime, où les algorithmes servent de pinceaux numériques, et où la logique computationnelle est exploitée pour explorer le mouvement, la géométrie et l'assistance de l'IA. En comblant le fossé entre la syntaxe rigide et la forme organique, ces créateurs repoussent les frontières de la toile numérique.">
+                        A collection of sketches, systems, and experiments treating code as a fluid material. This space
+                        gathers interesting repositories and portfolios where visual intuition leads, algorithms serve
+                        as digital brushes, and computational logic is harnessed to explore motion, geometry, and AI
+                        assistance. By bridging the gap between rigid syntax and organic form, these creators redefine
+                        the boundaries of the digital canvas.
+                    </p>
                 </div>
             </div>
         </section>
 
-        <section class="pb-20">
-            <div class="container mx-auto px-4">
-                <div class="max-w-6xl mx-auto border-t border-gray-800 pt-16">
-                    <p class="text-xs uppercase tracking-[0.35em] text-gray-500 mb-4" data-lang-en="Why this exists" data-lang-fr="Pourquoi cette page existe">Why this exists</p>
-                    <div class="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] items-start">
-                        <div>
-                            <h2 class="text-3xl md:text-4xl font-bold mb-4" data-lang-en="Closer to the studio side of code" data-lang-fr="Plus proche du versant atelier du code">Closer to the studio side of code</h2>
-                            <p class="text-gray-300 leading-8" data-lang-en="What interests me here is not code as performance or code as product, but code as material: something you can sketch with, repeat, distort, train, and translate into visuals. Sometimes that means generative patterns. Sometimes it means using AI as a partner for variation, selection, or surprise. The point is to explore what new forms appear when technical tools are used with an artistic intention." data-lang-fr="Ce qui m'intéresse ici, ce n'est pas le code comme performance ni comme produit, mais le code comme matière : quelque chose avec lequel on peut esquisser, répéter, déformer, entraîner et traduire des idées en visuel. Parfois cela prend la forme de motifs génératifs. Parfois il s'agit d'utiliser l'IA comme partenaire de variation, de sélection ou de surprise. L'enjeu est d'explorer les formes qui apparaissent lorsque des outils techniques sont utilisés avec une intention artistique.">What is of interests to me is not just code as performance or code as product, but code as material: something you can sketch with, repeat, distort, train, and translate into visuals. Sometimes that means generative patterns. Sometimes it means using AI as a partner for variation, selection, or surprise. The point is to explore what new forms appear when technical tools are used with an artistic intention.</p>
+        <!-- Grid Section -->
+        <section id="repositories">
+            <div class="container mx-auto px-4 max-w-6xl">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                    <article
+                        class="card bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark rounded-xl overflow-hidden flex flex-col h-full shadow-sm hover:shadow-md transition-shadow">
+                        <a href="https://github.com/shiffman/The-Nature-of-Code" target="_blank"
+                            rel="noopener noreferrer"
+                            class="block aspect-video overflow-hidden border-b border-border-light dark:border-border-dark">
+                            <img src="https://opengraph.githubassets.com/1/shiffman/The-Nature-of-Code"
+                                alt="Daniel Shiffman Artwork"
+                                class="w-full h-full object-cover bg-gray-100 dark:bg-gray-800 hover:scale-105 transition-transform duration-500">
+                        </a>
+                        <div class="p-6 flex-1 flex flex-col">
+                            <div class="flex items-center justify-between mb-3">
+                                <h3 class="font-semibold text-lg"><a
+                                        href="https://github.com/shiffman/The-Nature-of-Code"
+                                        class="hover:underline">Daniel Shiffman</a></h3>
+                                <span
+                                    class="text-xs font-mono text-text-muted-light dark:text-text-muted-dark">@shiffman</span>
+                            </div>
+                            <p class="text-sm text-text-muted-light dark:text-text-muted-dark mb-4 flex-1">Educational
+                                examples simulating physics and biological systems in p5.js.</p>
+                            <a href="https://github.com/shiffman/The-Nature-of-Code" target="_blank"
+                                rel="noopener noreferrer"
+                                class="text-xs font-medium text-indigo-500 hover:text-indigo-600 dark:text-indigo-400 dark:hover:text-indigo-300">View
+                                Reference &rarr;</a>
                         </div>
-                        <div class="grid gap-4 md:grid-cols-3">
-                            <article class="rounded-2xl bg-gray-800 border border-gray-700 p-6">
-                                <p class="text-xs uppercase tracking-[0.3em] text-indigo-300 mb-3" data-lang-en="Make things" data-lang-fr="Créer">Make things</p>
-                                <p class="text-gray-300 text-sm leading-7" data-lang-en="Some repositories begin with a visual hunch and turn into motion, texture, or interaction." data-lang-fr="Certains dépôts commencent par une intuition visuelle et deviennent mouvement, texture ou interaction.">Some repositories begin with a visual hunch and turn into motion, texture, or interaction.</p>
-                            </article>
-                            <article class="rounded-2xl bg-gray-800 border border-gray-700 p-6">
-                                <p class="text-xs uppercase tracking-[0.3em] text-emerald-300 mb-3" data-lang-en="Learn by seeing" data-lang-fr="Apprendre en voyant">Learn by seeing</p>
-                                <p class="text-gray-300 text-sm leading-7" data-lang-en="Seeing an output change in real time is often the fastest way to understand what a system can do." data-lang-fr="Voir un résultat changer en temps réel est souvent la façon la plus directe de comprendre ce qu'un système peut faire.">Seeing an output change in real time is often the fastest way to understand what a system can do.</p>
-                            </article>
-                            <article class="rounded-2xl bg-gray-800 border border-gray-700 p-6">
-                                <p class="text-xs uppercase tracking-[0.3em] text-amber-300 mb-3" data-lang-en="Bridge disciplines" data-lang-fr="Relier les disciplines">Bridge disciplines</p>
-                                <p class="text-gray-300 text-sm leading-7" data-lang-en="Art, generative logic, and AI become most interesting when they are treated as parts of the same studio practice." data-lang-fr="L'art, la logique générative et l'IA deviennent plus intéressants lorsqu'ils sont pensés comme les parties d'une même pratique d'atelier.">Art, generative logic, and AI become most interesting when they are treated as parts of the same studio practice.</p>
-                            </article>
+                    </article>
+                    <article
+                        class="card bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark rounded-xl overflow-hidden flex flex-col h-full shadow-sm hover:shadow-md transition-shadow">
+                        <a href="https://github.com/bitcraftlab/Vera-Molnar" target="_blank" rel="noopener noreferrer"
+                            class="block aspect-video overflow-hidden border-b border-border-light dark:border-border-dark">
+                            <img src="https://opengraph.githubassets.com/1/bitcraftlab/Vera-Molnar"
+                                alt="Vera Molnár Artwork"
+                                class="w-full h-full object-cover bg-gray-100 dark:bg-gray-800 hover:scale-105 transition-transform duration-500">
+                        </a>
+                        <div class="p-6 flex-1 flex flex-col">
+                            <div class="flex items-center justify-between mb-3">
+                                <h3 class="font-semibold text-lg"><a href="https://github.com/bitcraftlab/Vera-Molnar"
+                                        class="hover:underline">Vera Molnár</a></h3>
+                                <span
+                                    class="text-xs font-mono text-text-muted-light dark:text-text-muted-dark">@bitcraftlab</span>
+                            </div>
+                            <p class="text-sm text-text-muted-light dark:text-text-muted-dark mb-4 flex-1">Processing
+                                sketches recreating the pioneer's geometric grid experiments.</p>
+                            <a href="https://github.com/bitcraftlab/Vera-Molnar" target="_blank"
+                                rel="noopener noreferrer"
+                                class="text-xs font-medium text-indigo-500 hover:text-indigo-600 dark:text-indigo-400 dark:hover:text-indigo-300">View
+                                Reference &rarr;</a>
                         </div>
-                    </div>
+                    </article>
+                    <article
+                        class="card bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark rounded-xl overflow-hidden flex flex-col h-full shadow-sm hover:shadow-md transition-shadow">
+                        <a href="https://github.com/Hi-Rez/Satin" target="_blank" rel="noopener noreferrer"
+                            class="block aspect-video overflow-hidden border-b border-border-light dark:border-border-dark">
+                            <img src="https://opengraph.githubassets.com/1/Hi-Rez/Satin" alt="Reza Ali Artwork"
+                                class="w-full h-full object-cover bg-gray-100 dark:bg-gray-800 hover:scale-105 transition-transform duration-500">
+                        </a>
+                        <div class="p-6 flex-1 flex flex-col">
+                            <div class="flex items-center justify-between mb-3">
+                                <h3 class="font-semibold text-lg"><a href="https://github.com/Hi-Rez/Satin"
+                                        class="hover:underline">Reza Ali</a></h3>
+                                <span
+                                    class="text-xs font-mono text-text-muted-light dark:text-text-muted-dark">@Hi-Rez</span>
+                            </div>
+                            <p class="text-sm text-text-muted-light dark:text-text-muted-dark mb-4 flex-1">A creative
+                                coding framework in Swift for 3D graphics and shaders.</p>
+                            <a href="https://github.com/Hi-Rez/Satin" target="_blank" rel="noopener noreferrer"
+                                class="text-xs font-medium text-indigo-500 hover:text-indigo-600 dark:text-indigo-400 dark:hover:text-indigo-300">View
+                                Reference &rarr;</a>
+                        </div>
+                    </article>
+                    <article
+                        class="card bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark rounded-xl overflow-hidden flex flex-col h-full shadow-sm hover:shadow-md transition-shadow">
+                        <a href="https://n-e-r-v-o-u-s.com/" target="_blank" rel="noopener noreferrer"
+                            class="block aspect-video overflow-hidden border-b border-border-light dark:border-border-dark">
+                            <img src="https://opengraph.githubassets.com/1/n-e-r-v-o-u-s/corollaria"
+                                alt="Nervous System Artwork"
+                                class="w-full h-full object-cover bg-gray-100 dark:bg-gray-800 hover:scale-105 transition-transform duration-500">
+                        </a>
+                        <div class="p-6 flex-1 flex flex-col">
+                            <div class="flex items-center justify-between mb-3">
+                                <h3 class="font-semibold text-lg"><a href="https://n-e-r-v-o-u-s.com/"
+                                        class="hover:underline">Nervous System</a></h3>
+                                <span
+                                    class="text-xs font-mono text-text-muted-light dark:text-text-muted-dark">@n-e-r-v-o-u-s</span>
+                            </div>
+                            <p class="text-sm text-text-muted-light dark:text-text-muted-dark mb-4 flex-1">Generative
+                                algorithms exploring organic growth and 3D printable structures.</p>
+                            <a href="https://n-e-r-v-o-u-s.com/" target="_blank" rel="noopener noreferrer"
+                                class="text-xs font-medium text-indigo-500 hover:text-indigo-600 dark:text-indigo-400 dark:hover:text-indigo-300">View
+                                Reference &rarr;</a>
+                        </div>
+                    </article>
+                    <article
+                        class="card bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark rounded-xl overflow-hidden flex flex-col h-full shadow-sm hover:shadow-md transition-shadow">
+                        <a href="https://github.com/patriciogonzalezvivo/thebookofshaders" target="_blank"
+                            rel="noopener noreferrer"
+                            class="block aspect-video overflow-hidden border-b border-border-light dark:border-border-dark">
+                            <img src="https://opengraph.githubassets.com/1/patriciogonzalezvivo/thebookofshaders"
+                                alt="Patricio Gonzalez Vivo Artwork"
+                                class="w-full h-full object-cover bg-gray-100 dark:bg-gray-800 hover:scale-105 transition-transform duration-500">
+                        </a>
+                        <div class="p-6 flex-1 flex flex-col">
+                            <div class="flex items-center justify-between mb-3">
+                                <h3 class="font-semibold text-lg"><a
+                                        href="https://github.com/patriciogonzalezvivo/thebookofshaders"
+                                        class="hover:underline">Patricio Gonzalez Vivo</a></h3>
+                                <span
+                                    class="text-xs font-mono text-text-muted-light dark:text-text-muted-dark">@patriciogonzalezvivo</span>
+                            </div>
+                            <p class="text-sm text-text-muted-light dark:text-text-muted-dark mb-4 flex-1">A
+                                step-by-step guide and interactive environment for learning GLSL shaders.</p>
+                            <a href="https://github.com/patriciogonzalezvivo/thebookofshaders" target="_blank"
+                                rel="noopener noreferrer"
+                                class="text-xs font-medium text-indigo-500 hover:text-indigo-600 dark:text-indigo-400 dark:hover:text-indigo-300">View
+                                Reference &rarr;</a>
+                        </div>
+                    </article>
+                    <article
+                        class="card bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark rounded-xl overflow-hidden flex flex-col h-full shadow-sm hover:shadow-md transition-shadow">
+                        <a href="https://github.com/inconvergent/weird" target="_blank" rel="noopener noreferrer"
+                            class="block aspect-video overflow-hidden border-b border-border-light dark:border-border-dark">
+                            <img src="https://opengraph.githubassets.com/1/inconvergent/weird" alt="Anders Hoff Artwork"
+                                class="w-full h-full object-cover bg-gray-100 dark:bg-gray-800 hover:scale-105 transition-transform duration-500">
+                        </a>
+                        <div class="p-6 flex-1 flex flex-col">
+                            <div class="flex items-center justify-between mb-3">
+                                <h3 class="font-semibold text-lg"><a href="https://github.com/inconvergent/weird"
+                                        class="hover:underline">Anders Hoff</a></h3>
+                                <span
+                                    class="text-xs font-mono text-text-muted-light dark:text-text-muted-dark">@inconvergent</span>
+                            </div>
+                            <p class="text-sm text-text-muted-light dark:text-text-muted-dark mb-4 flex-1">Generative
+                                algorithms producing organic forms and line drawings in Common Lisp.</p>
+                            <a href="https://github.com/inconvergent/weird" target="_blank" rel="noopener noreferrer"
+                                class="text-xs font-medium text-indigo-500 hover:text-indigo-600 dark:text-indigo-400 dark:hover:text-indigo-300">View
+                                Reference &rarr;</a>
+                        </div>
+                    </article>
+                    <article
+                        class="card bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark rounded-xl overflow-hidden flex flex-col h-full shadow-sm hover:shadow-md transition-shadow">
+                        <a href="https://github.com/mattdesl/canvas-sketch" target="_blank" rel="noopener noreferrer"
+                            class="block aspect-video overflow-hidden border-b border-border-light dark:border-border-dark">
+                            <img src="https://opengraph.githubassets.com/1/mattdesl/canvas-sketch"
+                                alt="Matt DesLauriers Artwork"
+                                class="w-full h-full object-cover bg-gray-100 dark:bg-gray-800 hover:scale-105 transition-transform duration-500">
+                        </a>
+                        <div class="p-6 flex-1 flex flex-col">
+                            <div class="flex items-center justify-between mb-3">
+                                <h3 class="font-semibold text-lg"><a href="https://github.com/mattdesl/canvas-sketch"
+                                        class="hover:underline">Matt DesLauriers</a></h3>
+                                <span
+                                    class="text-xs font-mono text-text-muted-light dark:text-text-muted-dark">@mattdesl</span>
+                            </div>
+                            <p class="text-sm text-text-muted-light dark:text-text-muted-dark mb-4 flex-1">A flexible
+                                framework for creating generative artwork in the browser.</p>
+                            <a href="https://github.com/mattdesl/canvas-sketch" target="_blank"
+                                rel="noopener noreferrer"
+                                class="text-xs font-medium text-indigo-500 hover:text-indigo-600 dark:text-indigo-400 dark:hover:text-indigo-300">View
+                                Reference &rarr;</a>
+                        </div>
+                    </article>
+                    <article
+                        class="card bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark rounded-xl overflow-hidden flex flex-col h-full shadow-sm hover:shadow-md transition-shadow">
+                        <a href="https://tylerxhobbs.com/" target="_blank" rel="noopener noreferrer"
+                            class="block aspect-video overflow-hidden border-b border-border-light dark:border-border-dark">
+                            <img src="https://images.squarespace-cdn.com/content/v1/5c12933f365fce388dc08e8b/1629831969234-A7T4QW445V6WQO8227O6/Tyler+Hobbs+Fidenza+313.png"
+                                alt="Tyler Hobbs Artwork"
+                                class="w-full h-full object-cover bg-gray-100 dark:bg-gray-800 hover:scale-105 transition-transform duration-500">
+                        </a>
+                        <div class="p-6 flex-1 flex flex-col">
+                            <div class="flex items-center justify-between mb-3">
+                                <h3 class="font-semibold text-lg"><a href="https://tylerxhobbs.com/"
+                                        class="hover:underline">Tyler Hobbs</a></h3>
+                                <span
+                                    class="text-xs font-mono text-text-muted-light dark:text-text-muted-dark">@tylerxhobbs</span>
+                            </div>
+                            <p class="text-sm text-text-muted-light dark:text-text-muted-dark mb-4 flex-1">Custom flow
+                                field algorithms bridging structured logic and natural aesthetics.</p>
+                            <a href="https://tylerxhobbs.com/" target="_blank" rel="noopener noreferrer"
+                                class="text-xs font-medium text-indigo-500 hover:text-indigo-600 dark:text-indigo-400 dark:hover:text-indigo-300">View
+                                Reference &rarr;</a>
+                        </div>
+                    </article>
+                    <article
+                        class="card bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark rounded-xl overflow-hidden flex flex-col h-full shadow-sm hover:shadow-md transition-shadow">
+                        <a href="https://manolo.art/" target="_blank" rel="noopener noreferrer"
+                            class="block aspect-video overflow-hidden border-b border-border-light dark:border-border-dark">
+                            <img src="https://opengraph.githubassets.com/1/manoloide/art"
+                                alt="Manolo Gamboa Naon Artwork"
+                                class="w-full h-full object-cover bg-gray-100 dark:bg-gray-800 hover:scale-105 transition-transform duration-500">
+                        </a>
+                        <div class="p-6 flex-1 flex flex-col">
+                            <div class="flex items-center justify-between mb-3">
+                                <h3 class="font-semibold text-lg"><a href="https://manolo.art/"
+                                        class="hover:underline">Manolo Gamboa Naon</a></h3>
+                                <span
+                                    class="text-xs font-mono text-text-muted-light dark:text-text-muted-dark">@manoloide</span>
+                            </div>
+                            <p class="text-sm text-text-muted-light dark:text-text-muted-dark mb-4 flex-1">Processing
+                                sketches exploring dense geometry, color, and plotter outputs.</p>
+                            <a href="https://manolo.art/" target="_blank" rel="noopener noreferrer"
+                                class="text-xs font-medium text-indigo-500 hover:text-indigo-600 dark:text-indigo-400 dark:hover:text-indigo-300">View
+                                Reference &rarr;</a>
+                        </div>
+                    </article>
+                    <article
+                        class="card bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark rounded-xl overflow-hidden flex flex-col h-full shadow-sm hover:shadow-md transition-shadow">
+                        <a href="https://piterpasma.nl/" target="_blank" rel="noopener noreferrer"
+                            class="block aspect-video overflow-hidden border-b border-border-light dark:border-border-dark">
+                            <img src="https://piterpasma.nl/img/f28.jpg" alt="Piter Pasma Artwork"
+                                class="w-full h-full object-cover bg-gray-100 dark:bg-gray-800 hover:scale-105 transition-transform duration-500">
+                        </a>
+                        <div class="p-6 flex-1 flex flex-col">
+                            <div class="flex items-center justify-between mb-3">
+                                <h3 class="font-semibold text-lg"><a href="https://piterpasma.nl/"
+                                        class="hover:underline">Piter Pasma</a></h3>
+                                <span
+                                    class="text-xs font-mono text-text-muted-light dark:text-text-muted-dark">@piterpasma</span>
+                            </div>
+                            <p class="text-sm text-text-muted-light dark:text-text-muted-dark mb-4 flex-1">Highly
+                                optimized generative code producing intricate Signed Distance Field renders.</p>
+                            <a href="https://piterpasma.nl/" target="_blank" rel="noopener noreferrer"
+                                class="text-xs font-medium text-indigo-500 hover:text-indigo-600 dark:text-indigo-400 dark:hover:text-indigo-300">View
+                                Reference &rarr;</a>
+                        </div>
+                    </article>
+                    <article
+                        class="card bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark rounded-xl overflow-hidden flex flex-col h-full shadow-sm hover:shadow-md transition-shadow">
+                        <a href="https://github.com/ofZach" target="_blank" rel="noopener noreferrer"
+                            class="block aspect-video overflow-hidden border-b border-border-light dark:border-border-dark">
+                            <img src="https://opengraph.githubassets.com/1/ofZach/ofxUI" alt="Zach Lieberman Artwork"
+                                class="w-full h-full object-cover bg-gray-100 dark:bg-gray-800 hover:scale-105 transition-transform duration-500">
+                        </a>
+                        <div class="p-6 flex-1 flex flex-col">
+                            <div class="flex items-center justify-between mb-3">
+                                <h3 class="font-semibold text-lg"><a href="https://github.com/ofZach"
+                                        class="hover:underline">Zach Lieberman</a></h3>
+                                <span
+                                    class="text-xs font-mono text-text-muted-light dark:text-text-muted-dark">@zachlieberman</span>
+                            </div>
+                            <p class="text-sm text-text-muted-light dark:text-text-muted-dark mb-4 flex-1">Daily coding
+                                sketches focused on typography, geometry, and optical illusions.</p>
+                            <a href="https://github.com/ofZach" target="_blank" rel="noopener noreferrer"
+                                class="text-xs font-medium text-indigo-500 hover:text-indigo-600 dark:text-indigo-400 dark:hover:text-indigo-300">View
+                                Reference &rarr;</a>
+                        </div>
+                    </article>
+                    <article
+                        class="card bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark rounded-xl overflow-hidden flex flex-col h-full shadow-sm hover:shadow-md transition-shadow">
+                        <a href="https://github.com/ml4a/ml4a" target="_blank" rel="noopener noreferrer"
+                            class="block aspect-video overflow-hidden border-b border-border-light dark:border-border-dark">
+                            <img src="https://opengraph.githubassets.com/1/ml4a/ml4a" alt="Gene Kogan Artwork"
+                                class="w-full h-full object-cover bg-gray-100 dark:bg-gray-800 hover:scale-105 transition-transform duration-500">
+                        </a>
+                        <div class="p-6 flex-1 flex flex-col">
+                            <div class="flex items-center justify-between mb-3">
+                                <h3 class="font-semibold text-lg"><a href="https://github.com/ml4a/ml4a"
+                                        class="hover:underline">Gene Kogan</a></h3>
+                                <span
+                                    class="text-xs font-mono text-text-muted-light dark:text-text-muted-dark">@ml4a</span>
+                            </div>
+                            <p class="text-sm text-text-muted-light dark:text-text-muted-dark mb-4 flex-1">Machine
+                                learning resources and Python models specifically aimed at artists.</p>
+                            <a href="https://github.com/ml4a/ml4a" target="_blank" rel="noopener noreferrer"
+                                class="text-xs font-medium text-indigo-500 hover:text-indigo-600 dark:text-indigo-400 dark:hover:text-indigo-300">View
+                                Reference &rarr;</a>
+                        </div>
+                    </article>
+                    <article
+                        class="card bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark rounded-xl overflow-hidden flex flex-col h-full shadow-sm hover:shadow-md transition-shadow">
+                        <a href="https://github.com/memo/ofxMSAFluid" target="_blank" rel="noopener noreferrer"
+                            class="block aspect-video overflow-hidden border-b border-border-light dark:border-border-dark">
+                            <img src="https://opengraph.githubassets.com/1/memo/ofxMSAFluid" alt="Memo Akten Artwork"
+                                class="w-full h-full object-cover bg-gray-100 dark:bg-gray-800 hover:scale-105 transition-transform duration-500">
+                        </a>
+                        <div class="p-6 flex-1 flex flex-col">
+                            <div class="flex items-center justify-between mb-3">
+                                <h3 class="font-semibold text-lg"><a href="https://github.com/memo/ofxMSAFluid"
+                                        class="hover:underline">Memo Akten</a></h3>
+                                <span
+                                    class="text-xs font-mono text-text-muted-light dark:text-text-muted-dark">@memo</span>
+                            </div>
+                            <p class="text-sm text-text-muted-light dark:text-text-muted-dark mb-4 flex-1">Real-time
+                                fluid simulations and human-machine interaction systems in C++.</p>
+                            <a href="https://github.com/memo/ofxMSAFluid" target="_blank" rel="noopener noreferrer"
+                                class="text-xs font-medium text-indigo-500 hover:text-indigo-600 dark:text-indigo-400 dark:hover:text-indigo-300">View
+                                Reference &rarr;</a>
+                        </div>
+                    </article>
+                    <article
+                        class="card bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark rounded-xl overflow-hidden flex flex-col h-full shadow-sm hover:shadow-md transition-shadow">
+                        <a href="https://twitter.com/beesandbombs" target="_blank" rel="noopener noreferrer"
+                            class="block aspect-video overflow-hidden border-b border-border-light dark:border-border-dark">
+                            <img src="https://pbs.twimg.com/profile_images/1647248386470002694/K4_cZ4S0_400x400.jpg"
+                                alt="Dave Whyte Artwork"
+                                class="w-full h-full object-cover bg-gray-100 dark:bg-gray-800 hover:scale-105 transition-transform duration-500">
+                        </a>
+                        <div class="p-6 flex-1 flex flex-col">
+                            <div class="flex items-center justify-between mb-3">
+                                <h3 class="font-semibold text-lg"><a href="https://twitter.com/beesandbombs"
+                                        class="hover:underline">Dave Whyte</a></h3>
+                                <span
+                                    class="text-xs font-mono text-text-muted-light dark:text-text-muted-dark">@beesandbombs</span>
+                            </div>
+                            <p class="text-sm text-text-muted-light dark:text-text-muted-dark mb-4 flex-1">Mathematical
+                                looping animations and precise geometric motion.</p>
+                            <a href="https://twitter.com/beesandbombs" target="_blank" rel="noopener noreferrer"
+                                class="text-xs font-medium text-indigo-500 hover:text-indigo-600 dark:text-indigo-400 dark:hover:text-indigo-300">View
+                                Reference &rarr;</a>
+                        </div>
+                    </article>
+                    <article
+                        class="card bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark rounded-xl overflow-hidden flex flex-col h-full shadow-sm hover:shadow-md transition-shadow">
+                        <a href="https://github.com/processing/p5.js" target="_blank" rel="noopener noreferrer"
+                            class="block aspect-video overflow-hidden border-b border-border-light dark:border-border-dark">
+                            <img src="https://opengraph.githubassets.com/1/processing/p5.js"
+                                alt="Lauren McCarthy Artwork"
+                                class="w-full h-full object-cover bg-gray-100 dark:bg-gray-800 hover:scale-105 transition-transform duration-500">
+                        </a>
+                        <div class="p-6 flex-1 flex flex-col">
+                            <div class="flex items-center justify-between mb-3">
+                                <h3 class="font-semibold text-lg"><a href="https://github.com/processing/p5.js"
+                                        class="hover:underline">Lauren McCarthy</a></h3>
+                                <span
+                                    class="text-xs font-mono text-text-muted-light dark:text-text-muted-dark">@processing</span>
+                            </div>
+                            <p class="text-sm text-text-muted-light dark:text-text-muted-dark mb-4 flex-1">A JavaScript
+                                library that makes creative coding accessible for artists and designers.</p>
+                            <a href="https://github.com/processing/p5.js" target="_blank" rel="noopener noreferrer"
+                                class="text-xs font-medium text-indigo-500 hover:text-indigo-600 dark:text-indigo-400 dark:hover:text-indigo-300">View
+                                Reference &rarr;</a>
+                        </div>
+                    </article>
+                    <article
+                        class="card bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark rounded-xl overflow-hidden flex flex-col h-full shadow-sm hover:shadow-md transition-shadow">
+                        <a href="https://sougwen.com/" target="_blank" rel="noopener noreferrer"
+                            class="block aspect-video overflow-hidden border-b border-border-light dark:border-border-dark">
+                            <img src="https://sougwen.com/wp-content/uploads/2019/08/SougwenChung_DrawingOperationsUnit_Flora-1.jpg"
+                                alt="Sougwen Chung Artwork"
+                                class="w-full h-full object-cover bg-gray-100 dark:bg-gray-800 hover:scale-105 transition-transform duration-500">
+                        </a>
+                        <div class="p-6 flex-1 flex flex-col">
+                            <div class="flex items-center justify-between mb-3">
+                                <h3 class="font-semibold text-lg"><a href="https://sougwen.com/"
+                                        class="hover:underline">Sougwen Chung</a></h3>
+                                <span
+                                    class="text-xs font-mono text-text-muted-light dark:text-text-muted-dark">@sougwen</span>
+                            </div>
+                            <p class="text-sm text-text-muted-light dark:text-text-muted-dark mb-4 flex-1">Code
+                                exploring mark-making and human-robotic collaboration.</p>
+                            <a href="https://sougwen.com/" target="_blank" rel="noopener noreferrer"
+                                class="text-xs font-medium text-indigo-500 hover:text-indigo-600 dark:text-indigo-400 dark:hover:text-indigo-300">View
+                                Reference &rarr;</a>
+                        </div>
+                    </article>
+                    <article
+                        class="card bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark rounded-xl overflow-hidden flex flex-col h-full shadow-sm hover:shadow-md transition-shadow">
+                        <a href="https://github.com/kylemcdonald/cv-examples" target="_blank" rel="noopener noreferrer"
+                            class="block aspect-video overflow-hidden border-b border-border-light dark:border-border-dark">
+                            <img src="https://opengraph.githubassets.com/1/kylemcdonald/cv-examples"
+                                alt="Kyle McDonald Artwork"
+                                class="w-full h-full object-cover bg-gray-100 dark:bg-gray-800 hover:scale-105 transition-transform duration-500">
+                        </a>
+                        <div class="p-6 flex-1 flex flex-col">
+                            <div class="flex items-center justify-between mb-3">
+                                <h3 class="font-semibold text-lg"><a href="https://github.com/kylemcdonald/cv-examples"
+                                        class="hover:underline">Kyle McDonald</a></h3>
+                                <span
+                                    class="text-xs font-mono text-text-muted-light dark:text-text-muted-dark">@kylemcdonald</span>
+                            </div>
+                            <p class="text-sm text-text-muted-light dark:text-text-muted-dark mb-4 flex-1">Open-source
+                                implementations linking computer vision and machine learning.</p>
+                            <a href="https://github.com/kylemcdonald/cv-examples" target="_blank"
+                                rel="noopener noreferrer"
+                                class="text-xs font-medium text-indigo-500 hover:text-indigo-600 dark:text-indigo-400 dark:hover:text-indigo-300">View
+                                Reference &rarr;</a>
+                        </div>
+                    </article>
+                    <article
+                        class="card bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark rounded-xl overflow-hidden flex flex-col h-full shadow-sm hover:shadow-md transition-shadow">
+                        <a href="https://github.com/ojack/hydra" target="_blank" rel="noopener noreferrer"
+                            class="block aspect-video overflow-hidden border-b border-border-light dark:border-border-dark">
+                            <img src="https://opengraph.githubassets.com/1/ojack/hydra" alt="Olivia Jack Artwork"
+                                class="w-full h-full object-cover bg-gray-100 dark:bg-gray-800 hover:scale-105 transition-transform duration-500">
+                        </a>
+                        <div class="p-6 flex-1 flex flex-col">
+                            <div class="flex items-center justify-between mb-3">
+                                <h3 class="font-semibold text-lg"><a href="https://github.com/ojack/hydra"
+                                        class="hover:underline">Olivia Jack</a></h3>
+                                <span
+                                    class="text-xs font-mono text-text-muted-light dark:text-text-muted-dark">@ojack</span>
+                            </div>
+                            <p class="text-sm text-text-muted-light dark:text-text-muted-dark mb-4 flex-1">A live coding
+                                environment for video synthesis inspired by analog modular synthesizers.</p>
+                            <a href="https://github.com/ojack/hydra" target="_blank" rel="noopener noreferrer"
+                                class="text-xs font-medium text-indigo-500 hover:text-indigo-600 dark:text-indigo-400 dark:hover:text-indigo-300">View
+                                Reference &rarr;</a>
+                        </div>
+                    </article>
                 </div>
+            </div>
             </div>
         </section>
 
-        <section id="repositories" class="pb-20">
-            <div class="container mx-auto px-4">
-                <div class="max-w-6xl mx-auto border-t border-gray-800 pt-16">
-                    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
-                        <div>
-                            <p class="text-xs uppercase tracking-[0.35em] text-gray-500 mb-4" data-lang-en="Repositories to explore" data-lang-fr="Dépôts à explorer">Repositories to explore</p>
-                            <h2 class="text-3xl md:text-4xl font-bold mb-4" data-lang-en="Ways into the work" data-lang-fr="Des façons d'entrer dans le travail">Ways into the work</h2>
-                            <p class="text-gray-300 max-w-3xl leading-8" data-lang-en="These directions are less about categories and more about entry points: places to explore motion, pattern, interfaces, prompts, and visual systems through code. They show different ways art can be built, not just displayed." data-lang-fr="Ces directions sont moins des catégories que des points d'entrée : des endroits pour explorer le mouvement, les motifs, les interfaces, les prompts et les systèmes visuels à travers le code. Elles montrent différentes manières de construire l'art, pas seulement de l'exposer.">These directions are less about categories and more about entry points: places to explore motion, pattern, interfaces, prompts, and visual systems through code. They show different ways art can be built, not just displayed.</p>
-                        </div>
-                    </div>
-
-                    <div class="mb-8 max-w-3xl">
-                        <p class="text-sm text-gray-300 leading-8" data-lang-en="These are references I would actually want near this page: artists and creative coders whose repositories show what happens when math, systems, shaders, loops, plotters, or prompts become part of an artistic language." data-lang-fr="Voici des références que je veux vraiment voir apparaître sur cette page : des artistes et codeurs créatifs dont les dépôts montrent ce qui se passe lorsque les maths, les systèmes, les shaders, les boucles, les plotters ou les prompts deviennent une partie du langage artistique.">These are references I would actually want near this page: artists and creative coders whose repositories show what happens when math, systems, shaders, loops, plotters, or prompts become part of an artistic language.</p>
-                    </div>
-
-                    <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-                        <article class="rounded-2xl bg-gray-800 border border-gray-700 p-5 shadow-lg">
-                            <div class="flex items-center justify-between mb-4 gap-4">
-                                <span class="text-xs uppercase tracking-[0.25em] text-gray-400">Anders Hoff</span>
-                                <span class="text-[11px] px-2 py-1 rounded-full bg-indigo-500/15 text-indigo-300">inconvergent</span>
-                            </div>
-                            <h3 class="text-xl font-semibold mb-3" data-lang-en="Organic algorithmic art in Common Lisp" data-lang-fr="Art algorithmique organique en Common Lisp">Organic algorithmic art in Common Lisp</h3>
-                            <p class="text-sm text-gray-300 leading-7 mb-4" data-lang-en="A strong reference for code that feels alive, irregular, and deeply system-driven rather than purely decorative." data-lang-fr="Une référence forte pour un code qui semble vivant, irrégulier et profondément guidé par des systèmes plutôt que simplement décoratif.">A strong reference for code that feels alive, irregular, and deeply system-driven rather than purely decorative.</p>
-                            <a href="https://github.com/inconvergent" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-sm text-indigo-300 hover:text-indigo-200 transition-colors">github.com/inconvergent</a>
-                        </article>
-                        <article class="rounded-2xl bg-gray-800 border border-gray-700 p-5 shadow-lg">
-                            <div class="flex items-center justify-between mb-4 gap-4">
-                                <span class="text-xs uppercase tracking-[0.25em] text-gray-400">Matt DesLauriers</span>
-                                <span class="text-[11px] px-2 py-1 rounded-full bg-emerald-500/15 text-emerald-300">mattdesl</span>
-                            </div>
-                            <h3 class="text-xl font-semibold mb-3" data-lang-en="Workshops and generative art studies" data-lang-fr="Workshops et études d'art génératif">Workshops and generative art studies</h3>
-                            <p class="text-sm text-gray-300 leading-7 mb-4" data-lang-en="One of the clearest entry points into creative coding with JavaScript, sketches, process, and visual experimentation." data-lang-fr="L'un des points d'entrée les plus clairs dans le creative coding avec JavaScript, les esquisses, le processus et l'expérimentation visuelle.">One of the clearest entry points into creative coding with JavaScript, sketches, process, and visual experimentation.</p>
-                            <a href="https://github.com/mattdesl/workshop-generative-art" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-sm text-emerald-300 hover:text-emerald-200 transition-colors">github.com/mattdesl/workshop-generative-art</a>
-                        </article>
-                        <article class="rounded-2xl bg-gray-800 border border-gray-700 p-5 shadow-lg">
-                            <div class="flex items-center justify-between mb-4 gap-4">
-                                <span class="text-xs uppercase tracking-[0.25em] text-gray-400">Manolo Gamboa Naon</span>
-                                <span class="text-[11px] px-2 py-1 rounded-full bg-amber-500/15 text-amber-300">manoloide</span>
-                            </div>
-                            <h3 class="text-xl font-semibold mb-3" data-lang-en="Math, algorithms, and pen plotter experiments" data-lang-fr="Maths, algorithmes et expérimentations au pen plotter">Math, algorithms, and pen plotter experiments</h3>
-                            <p class="text-sm text-gray-300 leading-7 mb-4" data-lang-en="Useful for seeing how structure, geometry, and controlled randomness can become a visual signature." data-lang-fr="Utile pour voir comment la structure, la géométrie et un hasard maîtrisé peuvent devenir une signature visuelle.">Useful for seeing how structure, geometry, and controlled randomness can become a visual signature.</p>
-                            <a href="https://github.com/manoloide" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-sm text-amber-300 hover:text-amber-200 transition-colors">github.com/manoloide</a>
-                        </article>
-                        <article class="rounded-2xl bg-gray-800 border border-gray-700 p-5 shadow-lg">
-                            <div class="flex items-center justify-between mb-4 gap-4">
-                                <span class="text-xs uppercase tracking-[0.25em] text-gray-400">Dave Whyte</span>
-                                <span class="text-[11px] px-2 py-1 rounded-full bg-pink-500/15 text-pink-300">beesandbombs</span>
-                            </div>
-                            <h3 class="text-xl font-semibold mb-3" data-lang-en="Looping animations and Processing studies" data-lang-fr="Animations en boucle et études Processing">Looping animations and Processing studies</h3>
-                            <p class="text-sm text-gray-300 leading-7 mb-4" data-lang-en="A reference for timing, repetition, and visual precision in algorithmic animation." data-lang-fr="Une référence pour le rythme, la répétition et la précision visuelle dans l'animation algorithmique.">A reference for timing, repetition, and visual precision in algorithmic animation.</p>
-                            <a href="https://github.com/beesandbombs" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-sm text-pink-300 hover:text-pink-200 transition-colors">github.com/beesandbombs</a>
-                        </article>
-                        <article class="rounded-2xl bg-gray-800 border border-gray-700 p-5 shadow-lg">
-                            <div class="flex items-center justify-between mb-4 gap-4">
-                                <span class="text-xs uppercase tracking-[0.25em] text-gray-400">Eric Davids</span>
-                                <span class="text-[11px] px-2 py-1 rounded-full bg-sky-500/15 text-sky-300">erdavids</span>
-                            </div>
-                            <h3 class="text-xl font-semibold mb-3" data-lang-en="Structure, chance, and generative composition" data-lang-fr="Structure, hasard et composition générative">Structure, chance, and generative composition</h3>
-                            <p class="text-sm text-gray-300 leading-7 mb-4" data-lang-en="A good example of work that balances control and surprise without losing coherence." data-lang-fr="Un bon exemple d'un travail qui équilibre contrôle et surprise sans perdre sa cohérence.">A good example of work that balances control and surprise without losing coherence.</p>
-                            <a href="https://github.com/erdavids/Generative-Art" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-sm text-sky-300 hover:text-sky-200 transition-colors">github.com/erdavids/Generative-Art</a>
-                        </article>
-                        <article class="rounded-2xl bg-gray-800 border border-gray-700 p-5 shadow-lg">
-                            <div class="flex items-center justify-between mb-4 gap-4">
-                                <span class="text-xs uppercase tracking-[0.25em] text-gray-400">Eric Yd</span>
-                                <span class="text-[11px] px-2 py-1 rounded-full bg-violet-500/15 text-violet-300">ericyd</span>
-                            </div>
-                            <h3 class="text-xl font-semibold mb-3" data-lang-en="Generative art with Kotlin, Rust, Processing, and shaders" data-lang-fr="Art génératif avec Kotlin, Rust, Processing et shaders">Generative art with Kotlin, Rust, Processing, and shaders</h3>
-                            <p class="text-sm text-gray-300 leading-7 mb-4" data-lang-en="Useful when the page wants to show that creative coding is not tied to one language or one visual tradition." data-lang-fr="Utile si la page veut montrer que le creative coding n'est lié ni à un seul langage ni à une seule tradition visuelle.">Useful when the page wants to show that creative coding is not tied to one language or one visual tradition.</p>
-                            <a href="https://github.com/ericyd/generative-art" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-sm text-violet-300 hover:text-violet-200 transition-colors">github.com/ericyd/generative-art</a>
-                        </article>
-                        <article class="rounded-2xl bg-gray-800 border border-gray-700 p-5 shadow-lg">
-                            <div class="flex items-center justify-between mb-4 gap-4">
-                                <span class="text-xs uppercase tracking-[0.25em] text-gray-400">Tyler Hobbs</span>
-                                <span class="text-[11px] px-2 py-1 rounded-full bg-indigo-500/15 text-indigo-300">tylerxhobbs</span>
-                            </div>
-                            <h3 class="text-xl font-semibold mb-3" data-lang-en="Generative visual algorithms" data-lang-fr="Algorithmes visuels génératifs">Generative visual algorithms</h3>
-                            <p class="text-sm text-gray-300 leading-7 mb-4" data-lang-en="Fascinating code that bridges the gap between structured programming and organic, natural-looking artwork." data-lang-fr="Un code fascinant qui fait le pont entre la programmation structurée et des œuvres d'art à l'apparence organique et naturelle.">Fascinating code that bridges the gap between structured programming and organic, natural-looking artwork.</p>
-                            <a href="https://github.com/tylerxhobbs" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-sm text-indigo-300 hover:text-indigo-200 transition-colors">github.com/tylerxhobbs</a>
-                        </article>
-                        <article class="rounded-2xl bg-gray-800 border border-gray-700 p-5 shadow-lg">
-                            <div class="flex items-center justify-between mb-4 gap-4">
-                                <span class="text-xs uppercase tracking-[0.25em] text-gray-400">Gene Kogan</span>
-                                <span class="text-[11px] px-2 py-1 rounded-full bg-emerald-500/15 text-emerald-300">genekogan</span>
-                            </div>
-                            <h3 class="text-xl font-semibold mb-3" data-lang-en="Machine Learning for Artists" data-lang-fr="Apprentissage Automatique pour les Artistes">Machine Learning for Artists</h3>
-                            <p class="text-sm text-gray-300 leading-7 mb-4" data-lang-en="Valuable resources showing how to train models, generate imagery, and use AI practically in creative coding." data-lang-fr="Des ressources précieuses montrant comment entraîner des modèles, générer des images et utiliser l'IA de manière pratique.">Valuable resources showing how to train models, generate imagery, and use AI practically in creative coding.</p>
-                            <a href="https://github.com/genekogan/ml4a" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-sm text-emerald-300 hover:text-emerald-200 transition-colors">github.com/genekogan/ml4a</a>
-                        </article>
-                        <article class="rounded-2xl bg-gray-800 border border-gray-700 p-5 shadow-lg">
-                            <div class="flex items-center justify-between mb-4 gap-4">
-                                <span class="text-xs uppercase tracking-[0.25em] text-gray-400">Mario Klingemann</span>
-                                <span class="text-[11px] px-2 py-1 rounded-full bg-pink-500/15 text-pink-300">quasimondo</span>
-                            </div>
-                            <h3 class="text-xl font-semibold mb-3" data-lang-en="AI art and neural networks experiments" data-lang-fr="Expérimentations en art IA et réseaux de neurones">AI art and neural networks experiments</h3>
-                            <p class="text-sm text-gray-300 leading-7 mb-4" data-lang-en="Pioneering work in AI art, demonstrating the unpredictable and surreal outputs of machine learning systems." data-lang-fr="Un travail de pionnier dans l'art IA, démontrant les résultats imprévisibles et surréalistes des systèmes génératifs.">Pioneering work in AI art, demonstrating the unpredictable and surreal outputs of machine learning systems.</p>
-                            <a href="https://github.com/quasimondo" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-sm text-pink-300 hover:text-pink-200 transition-colors">github.com/quasimondo</a>
-                        </article>
-                        <article class="rounded-2xl bg-gray-800 border border-gray-700 p-5 shadow-lg">
-                            <div class="flex items-center justify-between mb-4 gap-4">
-                                <span class="text-xs uppercase tracking-[0.25em] text-gray-400">Memo Akten</span>
-                                <span class="text-[11px] px-2 py-1 rounded-full bg-cyan-500/15 text-cyan-300">memo</span>
-                            </div>
-                            <h3 class="text-xl font-semibold mb-3" data-lang-en="Fluid simulation and AI interaction" data-lang-fr="Simulation fluide et interaction IA">Fluid simulation and AI interaction</h3>
-                            <p class="text-sm text-gray-300 leading-7 mb-4" data-lang-en="Incredible repositories detailing the intersection of human movement, interactive fluids, and machine intelligence." data-lang-fr="Des dépôts incroyables détaillant l'intersection du mouvement humain, des fluides interactifs et de l'intelligence artificielle.">Incredible repositories detailing the intersection of human movement, interactive fluids, and machine intelligence.</p>
-                            <a href="https://github.com/memo" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-sm text-cyan-300 hover:text-cyan-200 transition-colors">github.com/memo</a>
-                        </article>
-                        <article class="rounded-2xl bg-gray-800 border border-gray-700 p-5 shadow-lg">
-                            <div class="flex items-center justify-between mb-4 gap-4">
-                                <span class="text-xs uppercase tracking-[0.25em] text-gray-400">Zach Lieberman</span>
-                                <span class="text-[11px] px-2 py-1 rounded-full bg-purple-500/15 text-purple-300">zachlieberman</span>
-                            </div>
-                            <h3 class="text-xl font-semibold mb-3" data-lang-en="Poetic computation and geometry" data-lang-fr="Computation poétique et géométrie">Poetic computation and geometry</h3>
-                            <p class="text-sm text-gray-300 leading-7 mb-4" data-lang-en="Daily sketches exploring type, geometry, and motion, deeply influencing modern creative coding." data-lang-fr="Des esquisses quotidiennes explorant la typographie, la géométrie et le mouvement.">Daily sketches exploring type, geometry, and motion, deeply influencing modern creative coding.</p>
-                            <a href="https://github.com/zachlieberman" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-sm text-purple-300 hover:text-purple-200 transition-colors">github.com/zachlieberman</a>
-                        </article>
-                        <article class="rounded-2xl bg-gray-800 border border-gray-700 p-5 shadow-lg">
-                            <div class="flex items-center justify-between mb-4 gap-4">
-                                <span class="text-xs uppercase tracking-[0.25em] text-gray-400">Kyle McDonald</span>
-                                <span class="text-[11px] px-2 py-1 rounded-full bg-orange-500/15 text-orange-300">kcimc</span>
-                            </div>
-                            <h3 class="text-xl font-semibold mb-3" data-lang-en="Open source arts and AI tools" data-lang-fr="Arts open source et outils IA">Open source arts and AI tools</h3>
-                            <p class="text-sm text-gray-300 leading-7 mb-4" data-lang-en="Groundbreaking tools linking optical flow, computer vision, and machine learning into accessible art workflows." data-lang-fr="Des outils novateurs reliant la vision par ordinateur et l'apprentissage automatique dans des flux artistiques.">Groundbreaking tools linking optical flow, computer vision, and machine learning into accessible art workflows.</p>
-                            <a href="https://github.com/kcimc" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-sm text-orange-300 hover:text-orange-200 transition-colors">github.com/kcimc</a>
-                        </article>
-                        <article class="rounded-2xl bg-gray-800 border border-gray-700 p-5 shadow-lg">
-                            <div class="flex items-center justify-between mb-4 gap-4">
-                                <span class="text-xs uppercase tracking-[0.25em] text-gray-400">Piter Pasma</span>
-                                <span class="text-[11px] px-2 py-1 rounded-full bg-red-500/15 text-red-300">piterpasma</span>
-                            </div>
-                            <h3 class="text-xl font-semibold mb-3" data-lang-en="SDF rendering and generative forms" data-lang-fr="Rendu SDF et formes génératives">SDF rendering and generative forms</h3>
-                            <p class="text-sm text-gray-300 leading-7 mb-4" data-lang-en="Highly optimized and deeply abstract generative code, especially known for Signed Distance Fields." data-lang-fr="Du code génératif hautement optimisé et profondément abstrait, connu pour les Signed Distance Fields.">Highly optimized and deeply abstract generative code, especially known for Signed Distance Fields.</p>
-                            <a href="https://github.com/piterpasma" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-sm text-red-300 hover:text-red-200 transition-colors">github.com/piterpasma</a>
-                        </article>
-                        <article class="rounded-2xl bg-gray-800 border border-gray-700 p-5 shadow-lg">
-                            <div class="flex items-center justify-between mb-4 gap-4">
-                                <span class="text-xs uppercase tracking-[0.25em] text-gray-400">Daniel Shiffman</span>
-                                <span class="text-[11px] px-2 py-1 rounded-full bg-yellow-500/15 text-yellow-300">shiffman</span>
-                            </div>
-                            <h3 class="text-xl font-semibold mb-3" data-lang-en="The Nature of Code" data-lang-fr="La Nature du Code">The Nature of Code</h3>
-                            <p class="text-sm text-gray-300 leading-7 mb-4" data-lang-en="The most extensive library of introductory creative coding algorithms simulating physics, biology, and math." data-lang-fr="La plus vaste bibliothèque d'algorithmes et de coding créatif simulant la physique, la biologie et les mathématiques.">The most extensive library of introductory creative coding algorithms simulating physics, biology, and math.</p>
-                            <a href="https://github.com/shiffman" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-sm text-yellow-300 hover:text-yellow-200 transition-colors">github.com/shiffman</a>
-                        </article>
-                        <article class="rounded-2xl bg-gray-800 border border-gray-700 p-5 shadow-lg">
-                            <div class="flex items-center justify-between mb-4 gap-4">
-                                <span class="text-xs uppercase tracking-[0.25em] text-gray-400">RunwayML</span>
-                                <span class="text-[11px] px-2 py-1 rounded-full bg-blue-500/15 text-blue-300">runwayml</span>
-                            </div>
-                            <h3 class="text-xl font-semibold mb-3" data-lang-en="Machine learning models for creators" data-lang-fr="Modèles d'apprentissage automatique pour les créateurs">Machine learning models for creators</h3>
-                            <p class="text-sm text-gray-300 leading-7 mb-4" data-lang-en="Open access to scripts and resources that help artists build, train, and utilize complex AI models." data-lang-fr="Accès ouvert à des scripts et ressources qui aident les artistes à construire et utiliser des modèles d'IA complexes.">Open access to scripts and resources that help artists build, train, and utilize complex AI models.</p>
-                            <a href="https://github.com/runwayml" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-sm text-blue-300 hover:text-blue-200 transition-colors">github.com/runwayml</a>
-                        </article>
-                        <article class="rounded-2xl bg-gray-800 border border-gray-700 p-5 shadow-lg">
-                            <div class="flex items-center justify-between mb-4 gap-4">
-                                <span class="text-xs uppercase tracking-[0.25em] text-gray-400">Frederik Vanhoutte</span>
-                                <span class="text-[11px] px-2 py-1 rounded-full bg-stone-500/15 text-stone-300">wblut</span>
-                            </div>
-                            <h3 class="text-xl font-semibold mb-3" data-lang-en="HE_Mesh and computational geometry" data-lang-fr="HE_Mesh et géométrie computationnelle">HE_Mesh and computational geometry</h3>
-                            <p class="text-sm text-gray-300 leading-7 mb-4" data-lang-en="Complex libraries for manipulating meshes and exploring deep 3D computational geometry in Processing." data-lang-fr="Bibliothèques complexes pour manipuler des maillages et explorer la géométrie computationnelle 3D.">Complex libraries for manipulating meshes and exploring deep 3D computational geometry in Processing.</p>
-                            <a href="https://github.com/wblut" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-sm text-stone-300 hover:text-stone-200 transition-colors">github.com/wblut</a>
-                        </article>
-                        <article class="rounded-2xl bg-gray-800 border border-gray-700 p-5 shadow-lg">
-                            <div class="flex items-center justify-between mb-4 gap-4">
-                                <span class="text-xs uppercase tracking-[0.25em] text-gray-400">Sougwen Chung</span>
-                                <span class="text-[11px] px-2 py-1 rounded-full bg-teal-500/15 text-teal-300">sougwen</span>
-                            </div>
-                            <h3 class="text-xl font-semibold mb-3" data-lang-en="Robotics, art, and human-machine collaboration" data-lang-fr="Robotique, art et collaboration humain-machine">Robotics, art, and human-machine collaboration</h3>
-                            <p class="text-sm text-gray-300 leading-7 mb-4" data-lang-en="Exploring mark-making alongside robotic arms and capturing the intimate interaction between humans and AI loops." data-lang-fr="Explorer le dessin avec des bras robotiques et capturer l'interaction intime entre l'humain et les boucles de l'IA.">Exploring mark-making alongside robotic arms and capturing the intimate interaction between humans and AI loops.</p>
-                            <a href="https://github.com/sougwen" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-sm text-teal-300 hover:text-teal-200 transition-colors">github.com/sougwen</a>
-                        </article>
-                        <article class="rounded-2xl bg-gray-800 border border-gray-700 p-5 shadow-lg">
-                            <div class="flex items-center justify-between mb-4 gap-4">
-                                <span class="text-xs uppercase tracking-[0.25em] text-gray-400">Jason Ting</span>
-                                <span class="text-[11px] px-2 py-1 rounded-full bg-rose-500/15 text-rose-300">jzting</span>
-                            </div>
-                            <h3 class="text-xl font-semibold mb-3" data-lang-en="Fluid motion and particles" data-lang-fr="Mouvement fluide et particules">Fluid motion and particles</h3>
-                            <p class="text-sm text-gray-300 leading-7 mb-4" data-lang-en="Extensive work with particle simulations and beautiful abstract rendering experiments using open standards." data-lang-fr="Un travail approfondi avec des simulations de particules et de magnifiques expériences de rendu abstrait.">Extensive work with particle simulations and beautiful abstract rendering experiments using open standards.</p>
-                            <a href="https://github.com/jzting" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-sm text-rose-300 hover:text-rose-200 transition-colors">github.com/jzting</a>
-                        </article>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="pb-24">
-            <div class="container mx-auto px-4">
-                <div class="max-w-4xl mx-auto rounded-3xl border border-gray-700 bg-gray-800 px-8 py-12 text-center shadow-xl">
-                    <p class="text-xs uppercase tracking-[0.35em] text-gray-500 mb-4" data-lang-en="Keep exploring" data-lang-fr="Continuer à explorer">Keep exploring</p>
-                    <h2 class="text-3xl md:text-4xl font-bold mb-4" data-lang-en="Start anywhere that feels alive" data-lang-fr="Commencer là où quelque chose semble vivant">Start anywhere that feels alive</h2>
-                    <p class="text-gray-300 text-lg leading-8 mb-8" data-lang-en="If one of these directions speaks to you, follow it. The goal here is not to separate art from code or AI, but to show how they can feed each other when experimentation leads the process." data-lang-fr="Si l'une de ces directions vous parle, suivez-la. L'idée n'est pas de séparer l'art du code ou de l'IA, mais de montrer comment ils peuvent se nourrir mutuellement lorsque l'expérimentation guide le processus.">If one of these directions speaks to you, follow it. The goal here is not to separate art from code or AI, but to show how they can feed each other when experimentation leads the process.</p>
-                    <div class="flex flex-wrap items-center justify-center gap-4">
-                        <a href="index.html" class="inline-flex items-center justify-center border border-gray-600 hover:border-white text-white font-semibold py-3 px-6 rounded-full transition-colors" data-lang-en="Return to platform" data-lang-fr="Retour à la plateforme">Return to platform</a>
-                        <a href="#repositories" class="inline-flex items-center justify-center bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-6 rounded-full transition-colors" data-lang-en="Browse repository directions" data-lang-fr="Parcourir les directions de dépôts">Browse repository directions</a>
-                    </div>
-                </div>
-            </div>
-        </section>
     </main>
 
-    <footer class="bg-gray-800 py-6">
-        <div class="container mx-auto px-4 text-center text-gray-400">
+    <footer class="bg-card-light dark:bg-card-dark py-6 border-t border-border-light dark:border-border-dark">
+        <div class="container mx-auto px-4 text-center text-sm text-text-muted-light dark:text-text-muted-dark">
             <p>Built with 💜 by Julia Yossa</p>
         </div>
     </footer>
 
     <script src="script.js"></script>
 </body>
+
 </html>
