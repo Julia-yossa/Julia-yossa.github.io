@@ -798,6 +798,15 @@ document.addEventListener('DOMContentLoaded', () => {
             postError.classList.add('hidden');
             postError.textContent = '';
         }
+
+        const btnLinkedin = document.getElementById('btn-linkedin');
+        const btnX = document.getElementById('btn-x');
+        if (btnLinkedin && btnX) {
+            const pageUrl = encodeURIComponent(window.location.href);
+            const pageTitle = encodeURIComponent(title || document.title);
+            btnLinkedin.href = `https://www.linkedin.com/sharing/share-offsite/?url=${pageUrl}`;
+            btnX.href = `https://twitter.com/intent/tweet?url=${pageUrl}&text=${pageTitle}&via=juliayossa`;
+        }
     }
 
     function showPostError(message) {
