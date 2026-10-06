@@ -23,9 +23,8 @@ document.addEventListener('DOMContentLoaded', () => {
             localStorage.setItem('theme', isDark ? 'dark' : 'light');
         });
     }
+
     // --- SMOOTH SCROLLING FOR NAVIGATION LINKS ---
-    // Selects all anchor links that start with '#' and adds a click event listener.
-    // On click, it prevents the default jump and smoothly scrolls to the target section.
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
@@ -35,25 +34,21 @@ document.addEventListener('DOMContentLoaded', () => {
                     behavior: 'smooth'
                 });
             }
-            // Close mobile menu on link click
             const mobileMenu = document.getElementById('mobile-menu');
-            if (!mobileMenu.classList.contains('hidden')) {
+            if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
                 mobileMenu.classList.add('hidden');
             }
         });
     });
 
     // --- LANGUAGE TOGGLE FUNCTIONALITY ---
-    // Handles switching the website's language between English and French.
     const langToggle = document.getElementById('lang-toggle');
-    const aboutEn = document.getElementById('about-en');
-    const aboutFr = document.getElementById('about-fr');
     const blogPostsContainer = document.getElementById('blog-posts');
     const postContent = document.getElementById('post-content');
 
     const initialLangParam = new URLSearchParams(window.location.search).get('lang');
     const savedLang = localStorage.getItem('lang');
-    let currentLang = 'en';
+    let currentLang = 'fr';
     if (initialLangParam === 'fr' || initialLangParam === 'en') {
         currentLang = initialLangParam;
     } else if (savedLang === 'fr' || savedLang === 'en') {
@@ -91,6 +86,25 @@ document.addEventListener('DOMContentLoaded', () => {
         document.documentElement.lang = currentLang;
         localStorage.setItem('lang', currentLang);
 
+        // Toggle elements using data-l="en" / data-l="fr"
+        document.querySelectorAll('[data-l="en"]').forEach(el => {
+            if (currentLang === 'en') {
+                el.classList.remove('hidden');
+            } else {
+                el.classList.add('hidden');
+            }
+        });
+        document.querySelectorAll('[data-l="fr"]').forEach(el => {
+            if (currentLang === 'fr') {
+                el.classList.remove('hidden');
+            } else {
+                el.classList.add('hidden');
+            }
+        });
+
+        // Toggle legacy #about-en / #about-fr if present
+        const aboutEn = document.getElementById('about-en');
+        const aboutFr = document.getElementById('about-fr');
         if (aboutEn && aboutFr) {
             if (currentLang === 'fr') {
                 aboutEn.classList.add('hidden');
@@ -101,6 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
+        // Translate attributes with data-lang-en / data-lang-fr
         const elementsToTranslate = document.querySelectorAll('[data-lang-en]');
         elementsToTranslate.forEach(el => {
             if (el.hasAttribute('data-no-translate')) {
@@ -116,6 +131,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         });
+
+        if (langToggle) {
+            langToggle.textContent = currentLang === 'fr' ? 'FR / EN' : 'EN / FR';
+        }
 
         updateInternalLinks();
 
@@ -143,77 +162,78 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- MOBILE MENU TOGGLE ---
-    // Handles the opening and closing of the mobile navigation menu.
     const mobileMenuButton = document.getElementById('mobile-menu-button');
     const mobileMenu = document.getElementById('mobile-menu');
 
-    mobileMenuButton.addEventListener('click', () => {
-        mobileMenu.classList.toggle('hidden');
-    });
-
-
+    if (mobileMenuButton && mobileMenu) {
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    }
 
     // --- TYPING ANIMATION ---
-    const englishTitles = ['Infrastructure Analyst', 'Data Analyst', 'Cybersecurity Analyst', 'AI Engineer', 'IT Project Manager'];
-    const frenchTitles = ['Analyste TI', 'Analyste de Données', 'Analyste en Cybersécurité', 'Ingénieure en IA', 'Gestionnaire de Projet TI'];
-    
-    let activeTitles = englishTitles; // Default to English
+    const englishTitles = [
+        'Troubleshooting under pressure',
+        'Data-driven decision making',
+        'Bridging tech & business'
+    ];
+    const frenchTitles = [
+        'Dépannage sous pression',
+        'Prise de décision guidée par les données',
+        'Faire le pont entre tech & affaires'
+    ];
+
+    let activeTitles = (currentLang === 'fr') ? frenchTitles : englishTitles;
     const typingElement = document.getElementById('typing-text');
     let titleIndex = 0;
     let charIndex = 0;
     let typingTimeout;
     let erasingTimeout;
 
-    const TYPING_SPEED = 100; // ms per character
-    const DELETING_SPEED = 50; // ms per character
-    const HOLD_TIME = 2000; // 2 seconds
+    const TYPING_SPEED = 90;
+    const DELETING_SPEED = 45;
+    const HOLD_TIME = 2200;
 
-    // Attach the cursor class initially
     if (typingElement) {
         typingElement.classList.add('typing-cursor');
     }
 
     function type() {
+        if (!typingElement) return;
         const currentTitle = activeTitles[titleIndex];
         if (charIndex < currentTitle.length) {
             typingElement.textContent += currentTitle.charAt(charIndex);
             charIndex++;
             typingTimeout = setTimeout(type, TYPING_SPEED);
         } else {
-            // Text is fully typed, now wait and then delete
             erasingTimeout = setTimeout(erase, HOLD_TIME);
         }
     }
 
     function erase() {
+        if (!typingElement) return;
         const currentTitle = activeTitles[titleIndex];
         if (charIndex > 0) {
             typingElement.textContent = currentTitle.substring(0, charIndex - 1);
             charIndex--;
             erasingTimeout = setTimeout(erase, DELETING_SPEED);
         } else {
-            // Text is fully erased, move to the next title
-            titleIndex = (titleIndex + 1) % activeTitles.length; // Cycle through titles
-            charIndex = 0; // Reset character index for the next title
-            typingTimeout = setTimeout(type, TYPING_SPEED); // Start typing the next title
+            titleIndex = (titleIndex + 1) % activeTitles.length;
+            charIndex = 0;
+            typingTimeout = setTimeout(type, TYPING_SPEED);
         }
     }
 
     function restartTypingAnimation() {
-        // Clear any ongoing timeouts
         clearTimeout(typingTimeout);
         clearTimeout(erasingTimeout);
-
-        // Set active titles based on current language
-        activeTitles = (currentLang === 'en') ? englishTitles : frenchTitles;
-        
-        // Reset animation state
+        activeTitles = (currentLang === 'fr') ? frenchTitles : englishTitles;
         titleIndex = 0;
         charIndex = 0;
-        typingElement.textContent = ''; // Clear current text
-        
-        // Start typing the first title of the new language
-        type();
+        if (typingElement) {
+            typingElement.textContent = '';
+            type();
+        }
     }
 
     // Apply language setting to UI on initial page load

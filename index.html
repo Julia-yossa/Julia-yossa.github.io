@@ -1,28 +1,44 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="fr" class="scroll-smooth">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Julia Yossa | IT Professional</title>
+    <title>Julia Yossa | Analyste Infrastructure & Applicative</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400;1,6..72,600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- FontAwesome & Devicon Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.15/devicon.min.css">
+    
+    <!-- Custom stylesheet -->
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <script>
         tailwind.config = {
             darkMode: 'class',
             theme: {
                 extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Newsreader', 'Georgia', 'serif'],
+                    },
                     colors: {
-                        base: { light: '#F4F1EA', dark: '#141414' },
-                        card: { light: '#FFFFFF', dark: '#1C1C1C' },
+                        base: { light: '#FAF8F5', dark: '#121212' },
+                        card: { light: '#FFFFFF', dark: '#1E1E22' },
                         text: {
-                            main: { light: '#1C1C1C', dark: '#EDEDED' },
-                            muted: { light: '#6B6B6B', dark: '#A3A3A3' }
+                            main: { light: '#1C1917', dark: '#F3F4F6' },
+                            muted: { light: '#6A655F', dark: '#9CA3AF' }
                         },
-                        border: { light: '#E5E0D8', dark: '#2E2E2E' }
+                        border: { light: '#E8E3DA', dark: '#2C2C32' },
+                        brand: { light: '#4F46E5', dark: '#818CF8' }
                     }
                 }
             }
@@ -46,268 +62,616 @@
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
-
         gtag('config', 'G-KWEQCJP536');
     </script>
+    <style>
+        .editorial-quote {
+            font-family: 'Newsreader', Georgia, serif;
+            font-style: italic;
+        }
+        .music-equalizer {
+            display: inline-flex;
+            align-items: flex-end;
+            gap: 2px;
+            height: 12px;
+        }
+        .music-equalizer span {
+            width: 3px;
+            background-color: #1DB954;
+            border-radius: 1px;
+            animation: equalizer 1.2s ease-in-out infinite alternate;
+        }
+        .music-equalizer span:nth-child(1) { height: 40%; animation-delay: 0.1s; }
+        .music-equalizer span:nth-child(2) { height: 100%; animation-delay: 0.3s; }
+        .music-equalizer span:nth-child(3) { height: 60%; animation-delay: 0.2s; }
+        .music-equalizer span:nth-child(4) { height: 80%; animation-delay: 0.4s; }
+
+        @keyframes equalizer {
+            0% { height: 20%; }
+            100% { height: 100%; }
+        }
+    </style>
 </head>
 
-<body class="bg-base-light dark:bg-base-dark text-text-main-light dark:text-text-main-dark font-sans corner-flowers-bg">
+<body class="bg-base-light dark:bg-base-dark text-text-main-light dark:text-text-main-dark font-sans antialiased transition-colors duration-300 min-h-screen">
 
-    <header class="bg-base-light/80 dark:bg-base-dark/80 backdrop-blur-lg fixed top-0 left-0 right-0 z-50 border-b border-border-light dark:border-border-dark">
-        <div class="container mx-auto px-4">
-            <nav class="flex items-center justify-between h-16" role="navigation" aria-label="Main">
-                <div class="flex items-center space-x-4">
-                    <a href="#home" class="text-xl font-bold tracking-tight">JY</a>
-                    <span id="live-clock" class="text-sm font-mono text-text-muted-light dark:text-text-muted-dark tabular-nums tracking-wider opacity-70">00:00:00</span>
+    <!-- Header Navigation -->
+    <header class="sticky top-0 z-50 bg-base-light/90 dark:bg-base-dark/90 backdrop-blur-md border-b border-border-light dark:border-border-dark">
+        <div class="container mx-auto px-4 md:px-8">
+            <nav class="flex items-center justify-between h-16" role="navigation" aria-label="Main Navigation">
+                <div class="flex items-center space-x-3">
+                    <a href="#home" class="text-xl font-bold tracking-tight flex items-center gap-2">
+                        <span class="w-8 h-8 rounded-lg bg-indigo-600 dark:bg-indigo-500 text-white flex items-center justify-center text-sm font-bold shadow-sm">JY</span>
+                        <span class="hidden sm:inline font-semibold">Julia Yossa</span>
+                    </a>
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" title="Systèmes opérationnels"></span>
+                    <span id="live-clock" class="text-xs font-mono text-text-muted-light dark:text-text-muted-dark tabular-nums tracking-wider opacity-80 pl-2 border-l border-border-light dark:border-border-dark">00:00:00</span>
                 </div>
                 
-                <ul class="hidden md:flex space-x-8 ml-auto text-sm font-medium">
-                    <li><a href="#about" class="hover:text-indigo-500 dark:hover:text-indigo-400 transition-colors" data-lang-en="About" data-lang-fr="À propos">About</a></li>
-                    <li><a href="blog.html" class="hover:text-indigo-500 dark:hover:text-indigo-400 transition-colors" data-lang-en="Insights" data-lang-fr="Réflexions">Insights</a></li>
-                    <li><a href="art-ai.html" class="hover:text-indigo-500 dark:hover:text-indigo-400 transition-colors" data-lang-en="Art & AI" data-lang-fr="Art & IA">Art & AI</a></li>
-                    <li><a href="#contact" class="hover:text-indigo-500 dark:hover:text-indigo-400 transition-colors" data-lang-en="Contact" data-lang-fr="Contact">Contact</a></li>
+                <ul class="hidden md:flex items-center space-x-8 text-sm font-medium">
+                    <li><a href="#about" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors" data-lang-en="About" data-lang-fr="À propos">À propos</a></li>
+                    <li><a href="blog.html" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors" data-lang-en="Insights" data-lang-fr="Réflexions">Réflexions</a></li>
+                    <li><a href="art-ai.html" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors" data-lang-en="Art & AI" data-lang-fr="Art & IA">Art & IA</a></li>
+                    <li><a href="#contact" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors" data-lang-en="Contact" data-lang-fr="Contact">Contact</a></li>
                 </ul>
 
-                <div class="flex items-center space-x-4 ml-8">
-                    <button id="theme-toggle" class="text-text-muted-light dark:text-text-muted-dark hover:text-text-main-light dark:hover:text-text-main-dark focus:outline-none transition-colors" aria-label="Toggle Theme">
-                        <i class="fa-solid fa-circle-half-stroke text-lg"></i>
+                <div class="flex items-center space-x-4">
+                    <button id="theme-toggle" class="p-2 rounded-lg text-text-muted-light dark:text-text-muted-dark hover:text-text-main-light dark:hover:text-text-main-dark hover:bg-border-light/50 dark:hover:bg-border-dark/50 transition-colors" aria-label="Basculer le thème">
+                        <i class="fa-solid fa-circle-half-stroke text-base"></i>
                     </button>
                     
-                    <button id="lang-toggle" class="text-xs font-semibold uppercase tracking-wider text-text-muted-light dark:text-text-muted-dark hover:text-text-main-light dark:hover:text-text-main-dark focus:outline-none transition-colors" aria-label="Toggle language">
-                        FR/EN
+                    <button id="lang-toggle" class="px-2.5 py-1 text-xs font-semibold rounded-md bg-border-light/60 dark:bg-border-dark/60 text-text-main-light dark:text-text-main-dark hover:bg-indigo-500/20 transition-colors" aria-label="Changer de langue">
+                        FR / EN
                     </button>
 
                     <div class="md:hidden">
-                        <button id="mobile-menu-button" class="focus:outline-none" aria-label="Open main menu">
-                            <i class="fa-solid fa-bars text-xl"></i>
+                        <button id="mobile-menu-button" class="p-2 rounded-lg text-text-main-light dark:text-text-main-dark" aria-label="Menu principal">
+                            <i class="fa-solid fa-bars text-lg"></i>
                         </button>
                     </div>
                 </div>
             </nav>
         </div>
+
+        <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden bg-base-light dark:bg-base-dark border-t border-border-light dark:border-border-dark">
-            <ul class="px-4 py-4 space-y-4">
-                <li><a href="#about" class="block text-base font-medium hover:text-indigo-500" data-lang-en="About" data-lang-fr="À propos">About</a></li>
-                <li><a href="blog.html" class="block text-base font-medium hover:text-indigo-500" data-lang-en="Insights" data-lang-fr="Réflexions">Insights</a></li>
-                <li><a href="art-ai.html" class="block text-base font-medium hover:text-indigo-500" data-lang-en="Art & AI" data-lang-fr="Art & IA">Art & AI</a></li>
-                <li><a href="#contact" class="block text-base font-medium hover:text-indigo-500" data-lang-en="Contact" data-lang-fr="Contact">Contact</a></li>
+            <ul class="px-6 py-4 space-y-3 font-medium text-sm">
+                <li><a href="#about" class="block py-1 hover:text-indigo-600" data-lang-en="About" data-lang-fr="À propos">À propos</a></li>
+                <li><a href="blog.html" class="block py-1 hover:text-indigo-600" data-lang-en="Insights" data-lang-fr="Réflexions">Réflexions</a></li>
+                <li><a href="art-ai.html" class="block py-1 hover:text-indigo-600" data-lang-en="Art & AI" data-lang-fr="Art & IA">Art & IA</a></li>
+                <li><a href="#contact" class="block py-1 hover:text-indigo-600" data-lang-en="Contact" data-lang-fr="Contact">Contact</a></li>
             </ul>
         </div>
     </header>
 
-    <main>
-        <section id="home" class="h-screen flex items-center justify-center text-center">
-            <div>
-                <h1 class="text-5xl md:text-7xl font-bold mb-4">Julia Yossa</h1>
-                <p class="text-xl md:text-2xl text-indigo-400" data-lang-en="IT Professional"
-                    data-lang-fr="Professionnelle en TI" data-no-translate="true"><span id="typing-text">IT
-                        Professional</span></p>
+    <main class="container mx-auto px-4 md:px-8 max-w-5xl">
+
+        <!-- Hero Section -->
+        <section id="home" class="py-20 md:py-28 flex flex-col items-center justify-center text-center">
+            <div class="space-y-6 max-w-3xl">
+                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 border border-indigo-500/20">
+                    <i class="fa-solid fa-microchip text-indigo-500"></i>
+                    <span data-l="fr">Analyste IT & Business Intelligence</span>
+                    <span data-l="en" class="hidden">IT & Business Intelligence Analyst</span>
+                </div>
+
+                <h1 class="text-4xl sm:text-6xl font-bold tracking-tight text-text-main-light dark:text-text-main-dark">
+                    Julia Yossa
+                </h1>
+
+                <div class="text-xl sm:text-2xl font-medium text-indigo-600 dark:text-indigo-400 h-8">
+                    <span id="typing-text">Dépannage sous pression</span>
+                </div>
+
+                <p class="text-base sm:text-lg text-text-muted-light dark:text-text-muted-dark leading-relaxed max-w-2xl mx-auto pt-2">
+                    <span data-l="fr">Faire en sorte que les systèmes fonctionnent pour que les équipes puissent travailler en toute sérénité.</span>
+                    <span data-l="en" class="hidden">Making sure systems run seamlessly so operational teams can perform with total peace of mind.</span>
+                </p>
+
+                <div class="flex flex-wrap items-center justify-center gap-4 pt-4">
+                    <a href="#about" class="px-6 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600 text-white font-medium text-sm transition-all shadow-md hover:shadow-indigo-500/20">
+                        <span data-lang-en="Discover my path" data-lang-fr="Découvrir mon parcours">Découvrir mon parcours</span>
+                    </a>
+                </div>
             </div>
         </section>
 
-        <section id="about" class="py-20">
-            <div class="container mx-auto px-4">
-                <div class="max-w-3xl mx-auto text-center">
-                    <h2 class="text-4xl font-bold mb-6" data-lang-en="About Me" data-lang-fr="À Propos de Moi">About Me
+        <!-- Section Hero & Introduction (À propos / About) -->
+        <section id="about" class="py-16 border-t border-border-light dark:border-border-dark">
+            <div class="max-w-4xl mx-auto space-y-10">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-2xl bg-indigo-600/10 text-indigo-600 dark:text-indigo-400 font-bold flex items-center justify-center text-xl border border-indigo-500/20">
+                        JY
+                    </div>
+                    <div>
+                        <p class="text-xs uppercase tracking-widest font-semibold text-indigo-600 dark:text-indigo-400">
+                            <span data-lang-en="About" data-lang-fr="À propos">À propos</span>
+                        </p>
+                        <h2 class="text-3xl font-bold tracking-tight text-text-main-light dark:text-text-main-dark" data-lang-en="About Me" data-lang-fr="Mon parcours">
+                            Mon parcours
+                        </h2>
+                    </div>
+                </div>
+
+                <!-- FRENCH VERSION -->
+                <div id="about-fr" data-l="fr" class="space-y-8 text-lg text-text-muted-light dark:text-text-muted-dark leading-relaxed">
+                    <p class="text-2xl sm:text-3xl editorial-quote text-text-main-light dark:text-text-main-dark border-l-4 border-indigo-600 dark:border-indigo-500 pl-6 py-1">
+                        « Rendre les systèmes robustes et les données immédiatement utiles pour les opérations. »
+                    </p>
+
+                    <!-- Background & Experience -->
+                    <div class="space-y-4">
+                        <p>
+                            Forte de <strong class="text-text-main-light dark:text-text-main-dark">plus de 8 ans d'expérience pratique en TI</strong>, principalement sur le terrain, j'apporte une approche axée sur le service, du sang-froid dans les situations critiques et une rigueur constante en résolution de problèmes.
+                        </p>
+                        <p>
+                            Aujourd'hui, j'occupe le poste d'<strong>Analyste infrastructure et applicative</strong> au sein d'une entreprise manufacturière. Mon quotidien s'articule autour de deux casquettes complémentaires :
+                        </p>
+                    </div>
+
+                    <!-- Two Hats Cards Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-6">
+                        <div class="p-6 rounded-2xl bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark hover:border-indigo-500/40 transition-all shadow-sm">
+                            <div class="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-600 dark:text-amber-400 flex items-center justify-center mb-4 text-lg font-bold">
+                                <i class="fa-solid fa-fire-extinguisher"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-text-main-light dark:text-text-main-dark mb-2">
+                                1. Le pompier ERP & Infra
+                            </h3>
+                            <p class="text-sm text-text-muted-light dark:text-text-muted-dark leading-normal">
+                                Gérer les urgences techniques, diagnostiquer les incidents applicatifs critiques, assurer la continuité des opérations 24/7 et veiller scrupuleusement à la sécurité des flux et des accès système.
+                            </p>
+                        </div>
+
+                        <div class="p-6 rounded-2xl bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark hover:border-indigo-500/40 transition-all shadow-sm">
+                            <div class="w-10 h-10 rounded-xl bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 flex items-center justify-center mb-4 text-lg font-bold">
+                                <i class="fa-solid fa-chart-line"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-text-main-light dark:text-text-main-dark mb-2">
+                                2. L'analyste Data & Décisionnel
+                            </h3>
+                            <p class="text-sm text-text-muted-light dark:text-text-muted-dark leading-normal">
+                                Traduire les besoins d'affaires complexes en tableaux de bord Power BI dynamiques, écrire des requêtes SQL performantes et concevoir des outils concrets d'aide à la décision pour la direction et les opérations.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="pt-6 border-t border-border-light dark:border-border-dark space-y-3 text-center">
+                        <p class="text-lg font-semibold text-text-main-light dark:text-text-main-dark">
+                            Rigoureuse • Pragmatique • Orientée solutions • Esprit analytique
+                        </p>
+                        <p class="text-base font-medium text-indigo-600 dark:text-indigo-400 flex flex-wrap items-center justify-center gap-4">
+                            <span class="inline-flex items-center gap-1.5"><i class="fa-solid fa-bolt text-amber-500"></i> Résolution d'énigmes de données complexes</span>
+                            <span class="inline-flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span> Ouverte aux échanges & idées</span>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- ENGLISH VERSION -->
+                <div id="about-en" data-l="en" class="hidden space-y-8 text-lg text-text-muted-light dark:text-text-muted-dark leading-relaxed">
+                    <p class="text-2xl sm:text-3xl editorial-quote text-text-main-light dark:text-text-main-dark border-l-4 border-indigo-600 dark:border-indigo-500 pl-6 py-1">
+                        "Building resilient IT systems and turning operational data into actionable clarity."
+                    </p>
+
+                    <!-- Background & Experience -->
+                    <div class="space-y-4">
+                        <p>
+                            Grounded in <strong class="text-text-main-light dark:text-text-main-dark">over 8 years of hands-on IT experience</strong>, primarily on the front lines, I bring a service-driven approach, composure in high-stakes situations, and relentless troubleshooting rigor.
+                        </p>
+                        <p>
+                            I currently serve as an <strong>Infrastructure and Application Analyst</strong> in a manufacturing company. My daily work revolves around two key roles:
+                        </p>
+                    </div>
+
+                    <!-- Two Hats Cards Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-6">
+                        <div class="p-6 rounded-2xl bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark hover:border-indigo-500/40 transition-all shadow-sm">
+                            <div class="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-600 dark:text-amber-400 flex items-center justify-center mb-4 text-lg font-bold">
+                                <i class="fa-solid fa-fire-extinguisher"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-text-main-light dark:text-text-main-dark mb-2">
+                                1. The ERP & Infra Firefighter
+                            </h3>
+                            <p class="text-sm text-text-muted-light dark:text-text-muted-dark leading-normal">
+                                Handling technical emergencies, troubleshooting critical ERP incidents, maintaining 24/7 operational continuity, and securing data flows and access permissions.
+                            </p>
+                        </div>
+
+                        <div class="p-6 rounded-2xl bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark hover:border-indigo-500/40 transition-all shadow-sm">
+                            <div class="w-10 h-10 rounded-xl bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 flex items-center justify-center mb-4 text-lg font-bold">
+                                <i class="fa-solid fa-chart-line"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-text-main-light dark:text-text-main-dark mb-2">
+                                2. The Data & BI Analyst
+                            </h3>
+                            <p class="text-sm text-text-muted-light dark:text-text-muted-dark leading-normal">
+                                Translating business needs into intuitive Power BI dashboards, crafting high-performance SQL queries, and building concrete decision-support tools for executive leadership and floor teams.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="pt-6 border-t border-border-light dark:border-border-dark space-y-3 text-center">
+                        <p class="text-lg font-semibold text-text-main-light dark:text-text-main-dark">
+                            Rigorous • Pragmatic • Solution-oriented • Analytical mindset
+                        </p>
+                        <p class="text-base font-medium text-indigo-600 dark:text-indigo-400 flex flex-wrap items-center justify-center gap-4">
+                            <span class="inline-flex items-center gap-1.5"><i class="fa-solid fa-bolt text-amber-500"></i> Solving complex data puzzles</span>
+                            <span class="inline-flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span> Open to explore ideas</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4 & 5: Right Now Card & Spotify Playlist Grid -->
+        <section id="now" class="py-16 border-t border-border-light dark:border-border-dark">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+                
+                <!-- Carte « En ce moment / Right now » -->
+                <div class="lg:col-span-5 p-6 md:p-8 rounded-3xl bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark shadow-sm flex flex-col justify-between space-y-6">
+                    <div>
+                        <div class="flex items-center justify-between mb-6">
+                            <h3 class="text-xl font-bold tracking-tight text-text-main-light dark:text-text-main-dark flex items-center gap-2">
+                                <i class="fa-solid fa-compass text-indigo-500"></i>
+                                <span data-l="fr">En ce moment</span>
+                                <span data-l="en" class="hidden">Right Now</span>
+                            </h3>
+                            <span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-indigo-500/10 text-indigo-600 dark:text-indigo-400">Status</span>
+                        </div>
+
+                        <div class="space-y-5">
+                            <!-- 1. Matière / Cours en cours -->
+                            <div class="pb-4 border-b border-border-light dark:border-border-dark">
+                                <p class="text-xs uppercase tracking-wider font-semibold text-text-muted-light dark:text-text-muted-dark mb-1">
+                                    <i class="fa-solid fa-graduation-cap text-indigo-500 mr-1.5"></i>
+                                    <span data-l="fr">Cours en cours</span>
+                                    <span data-l="en" class="hidden">Current Course</span>
+                                </p>
+                                <p class="text-base font-semibold text-text-main-light dark:text-text-main-dark">
+                                    Gestion des risques en commerce électronique
+                                </p>
+                            </div>
+
+                            <!-- 2. Livre en cours de lecture (Highlighted size) -->
+                            <div class="pb-4 border-b border-border-light dark:border-border-dark">
+                                <p class="text-xs uppercase tracking-wider font-semibold text-indigo-600 dark:text-indigo-400 mb-1">
+                                    <i class="fa-solid fa-book-open text-indigo-500 mr-1.5"></i>
+                                    <span data-l="fr">Lecture actuelle</span>
+                                    <span data-l="en" class="hidden">Currently Reading</span>
+                                </p>
+                                <p class="text-lg font-bold text-text-main-light dark:text-text-main-dark leading-snug">
+                                    The Let Them Theory
+                                </p>
+                                <p class="text-xs text-text-muted-light dark:text-text-muted-dark mt-0.5">
+                                    Mel Robbins & Sawyer Robbins
+                                </p>
+                            </div>
+
+                            <!-- 3. Dernier livre terminé (Smaller font size: 0.85em) -->
+                            <div>
+                                <p class="text-[11px] uppercase tracking-wider font-semibold text-text-muted-light/80 dark:text-text-muted-dark/80 mb-1">
+                                    <i class="fa-solid fa-check text-emerald-500 mr-1.5"></i>
+                                    <span data-l="fr">Dernier livre terminé</span>
+                                    <span data-l="en" class="hidden">Last Completed Book</span>
+                                </p>
+                                <p class="text-[0.85em] font-medium text-text-muted-light dark:text-text-muted-dark">
+                                    Open to Work — Ryan Roslansky & Aneesh Raman
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt-2 text-xs text-text-muted-light dark:text-text-muted-dark italic">
+                        <span data-l="fr">Mise à jour régulière selon mes lectures et projets.</span>
+                        <span data-l="en" class="hidden">Updated regularly based on current reads & projects.</span>
+                    </div>
+                </div>
+
+                <!-- Section Top 5 Playlist Spotify (Current Rotation) -->
+                <div class="lg:col-span-7 p-6 md:p-8 rounded-3xl bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-6">
+                            <h3 class="text-xl font-bold tracking-tight text-text-main-light dark:text-text-main-dark flex items-center gap-2">
+                                <i class="fa-brands fa-spotify text-emerald-500 text-2xl"></i>
+                                <span data-l="fr">Current Rotation — Top 5 Playlist</span>
+                                <span data-l="en" class="hidden">Current Rotation — Top 5 Playlist</span>
+                            </h3>
+                            <div class="music-equalizer" title="Lecteur actif">
+                                <span></span><span></span><span></span><span></span>
+                            </div>
+                        </div>
+
+                        <ul class="space-y-3">
+                            <!-- Piste 1 -->
+                            <li>
+                                <a href="https://open.spotify.com/search/Dwin%20the%20stoic%20Without%20your%20love" target="_blank" rel="noopener noreferrer" class="p-3 rounded-xl bg-base-light/60 dark:bg-base-dark/60 border border-border-light/50 dark:border-border-dark/50 flex items-center justify-between hover:border-emerald-500/50 hover:bg-emerald-500/5 transition-all group">
+                                    <div class="flex items-center space-x-3.5">
+                                        <span class="w-6 text-center text-xs font-bold text-emerald-600 dark:text-emerald-400">01</span>
+                                        <div>
+                                            <p class="text-sm font-bold text-text-main-light dark:text-text-main-dark group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">Without Your Love</p>
+                                            <p class="text-xs text-text-muted-light dark:text-text-muted-dark">Dwin, The Stoic</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center gap-2 text-text-muted-light dark:text-text-muted-dark group-hover:text-emerald-500 transition-colors">
+                                        <span class="text-[10px] font-semibold uppercase tracking-wider hidden sm:inline">Spotify</span>
+                                        <i class="fa-brands fa-spotify text-base"></i>
+                                    </div>
+                                </a>
+                            </li>
+
+                            <!-- Piste 2 -->
+                            <li>
+                                <a href="https://open.spotify.com/search/Tove%20Lo%20Stromae%20Des%20fleurs" target="_blank" rel="noopener noreferrer" class="p-3 rounded-xl bg-base-light/60 dark:bg-base-dark/60 border border-border-light/50 dark:border-border-dark/50 flex items-center justify-between hover:border-emerald-500/50 hover:bg-emerald-500/5 transition-all group">
+                                    <div class="flex items-center space-x-3.5">
+                                        <span class="w-6 text-center text-xs font-bold text-indigo-500">02</span>
+                                        <div>
+                                            <p class="text-sm font-bold text-text-main-light dark:text-text-main-dark group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">Des fleurs</p>
+                                            <p class="text-xs text-text-muted-light dark:text-text-muted-dark">Tove Lo feat. Stromae</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center gap-2 text-text-muted-light dark:text-text-muted-dark group-hover:text-emerald-500 transition-colors">
+                                        <span class="text-[10px] font-semibold uppercase tracking-wider hidden sm:inline">Spotify</span>
+                                        <i class="fa-brands fa-spotify text-base"></i>
+                                    </div>
+                                </a>
+                            </li>
+
+                            <!-- Piste 3 -->
+                            <li>
+                                <a href="https://open.spotify.com/search/Dwin%20the%20stoic%20I%20go%20nowhere" target="_blank" rel="noopener noreferrer" class="p-3 rounded-xl bg-base-light/60 dark:bg-base-dark/60 border border-border-light/50 dark:border-border-dark/50 flex items-center justify-between hover:border-emerald-500/50 hover:bg-emerald-500/5 transition-all group">
+                                    <div class="flex items-center space-x-3.5">
+                                        <span class="w-6 text-center text-xs font-bold text-indigo-500">03</span>
+                                        <div>
+                                            <p class="text-sm font-bold text-text-main-light dark:text-text-main-dark group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">I Go Nowhere</p>
+                                            <p class="text-xs text-text-muted-light dark:text-text-muted-dark">Dwin, The Stoic</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center gap-2 text-text-muted-light dark:text-text-muted-dark group-hover:text-emerald-500 transition-colors">
+                                        <span class="text-[10px] font-semibold uppercase tracking-wider hidden sm:inline">Spotify</span>
+                                        <i class="fa-brands fa-spotify text-base"></i>
+                                    </div>
+                                </a>
+                            </li>
+
+                            <!-- Piste 4 -->
+                            <li>
+                                <a href="https://open.spotify.com/search/JP%20Saxe%20Julia%20Michaels%20If%20the%20world%20was%20ending" target="_blank" rel="noopener noreferrer" class="p-3 rounded-xl bg-base-light/60 dark:bg-base-dark/60 border border-border-light/50 dark:border-border-dark/50 flex items-center justify-between hover:border-emerald-500/50 hover:bg-emerald-500/5 transition-all group">
+                                    <div class="flex items-center space-x-3.5">
+                                        <span class="w-6 text-center text-xs font-bold text-indigo-500">04</span>
+                                        <div>
+                                            <p class="text-sm font-bold text-text-main-light dark:text-text-main-dark group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">If the World Was Ending</p>
+                                            <p class="text-xs text-text-muted-light dark:text-text-muted-dark">JP Saxe feat. Julia Michaels</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center gap-2 text-text-muted-light dark:text-text-muted-dark group-hover:text-emerald-500 transition-colors">
+                                        <span class="text-[10px] font-semibold uppercase tracking-wider hidden sm:inline">Spotify</span>
+                                        <i class="fa-brands fa-spotify text-base"></i>
+                                    </div>
+                                </a>
+                            </li>
+
+                            <!-- Piste 5 -->
+                            <li>
+                                <a href="https://open.spotify.com/search/Miji%20Bed%20of%20roses" target="_blank" rel="noopener noreferrer" class="p-3 rounded-xl bg-base-light/60 dark:bg-base-dark/60 border border-border-light/50 dark:border-border-dark/50 flex items-center justify-between hover:border-emerald-500/50 hover:bg-emerald-500/5 transition-all group">
+                                    <div class="flex items-center space-x-3.5">
+                                        <span class="w-6 text-center text-xs font-bold text-indigo-500">05</span>
+                                        <div>
+                                            <p class="text-sm font-bold text-text-main-light dark:text-text-main-dark group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">Bed of Roses</p>
+                                            <p class="text-xs text-text-muted-light dark:text-text-muted-dark">Miji</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center gap-2 text-text-muted-light dark:text-text-muted-dark group-hover:text-emerald-500 transition-colors">
+                                        <span class="text-[10px] font-semibold uppercase tracking-wider hidden sm:inline">Spotify</span>
+                                        <i class="fa-brands fa-spotify text-base"></i>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Section Compétences Technologiques (« Tools / Stack ») -->
+        <section id="skills" class="py-16 border-t border-border-light dark:border-border-dark">
+            <div class="space-y-12">
+                <div class="text-center max-w-2xl mx-auto space-y-3">
+                    <h2 class="text-3xl font-bold tracking-tight text-text-main-light dark:text-text-main-dark" data-lang-en="Tools & Tech Stack" data-lang-fr="Compétences Technologiques">
+                        Compétences Technologiques
                     </h2>
+                    <p class="text-sm text-text-muted-light dark:text-text-muted-dark">
+                        <span data-l="fr">Une liste des outils et technologies que j'utilise au quotidien dans mon travail.</span>
+                        <span data-l="en" class="hidden">A list of current tools and technologies I am using in my daily job.</span>
+                    </p>
+                </div>
 
-                    <div id="about-en" class="text-lg text-text-muted-light dark:text-text-muted-dark space-y-6 text-left">
-                        <div class="flex items-center gap-4">
-                            <div
-                                class="w-12 h-12 rounded-full bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 font-semibold flex items-center justify-center">
-                                J</div>
+                <!-- Grid of 4 Targeted Skill Blocks -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+                    <!-- Bloc 1: Business Intelligence & Données -->
+                    <div class="p-6 rounded-3xl bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark shadow-sm hover:border-indigo-500/40 transition-all space-y-4 flex flex-col justify-between">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-600 dark:text-amber-400 flex items-center justify-center text-xl shrink-0">
+                                <i class="fa-solid fa-chart-pie"></i>
+                            </div>
                             <div>
-                                <p class="text-xs uppercase tracking-[0.3em] text-text-muted-light dark:text-text-muted-dark">About Me</p>
-                                <h3 class="text-3xl font-semibold text-text-main-light dark:text-text-main-dark">Julia</h3>
+                                <h3 class="text-lg font-bold text-text-main-light dark:text-text-main-dark">
+                                    <span data-l="fr">1. Business Intelligence & Données</span>
+                                    <span data-l="en" class="hidden">1. Business Intelligence & Data</span>
+                                </h3>
+                                <p class="text-xs text-text-muted-light dark:text-text-muted-dark">
+                                    <span data-l="fr">Power BI, Tableau, SQL Server, Excel</span>
+                                    <span data-l="en" class="hidden">Power BI, Tableau, SQL Server, Excel</span>
+                                </p>
                             </div>
                         </div>
-                        <p class="text-3xl font-serif italic text-text-main-light dark:text-text-main-dark">Making technology feel human</p>
-                        <p>I've spent over five years on the technical side of digital infrastructure, securing Linux
-                            environments, automating workflows with Python, and designing systems that hold up under
-                            pressure. The part I care about most is not the code. It's what the code makes possible for
-                            the people using it.</p>
-                        <hr class="border-border-light dark:border-border-dark">
-                        <p>Security, to me, is not about restriction. A well designed firewall is a welcome gate for the
-                            people who belong and a quiet, firm boundary for those who do not. A well built system does
-                            not demand that users adapt to it. It disappears into the background and lets them focus on
-                            what matters.</p>
-                        <p>The thread running through everything I do: translating the complex language of systems and
-                            security into something clear, useful, and grounded in how people actually work and live.
-                        </p>
-                        <hr class="border-border-light dark:border-border-dark">
-                        <p>This site is where I share that thinking, practical insights, honest reflections, and
-                            resources built around the idea that a secure digital world should be understandable.</p>
-                        <div class="flex flex-wrap gap-3 text-sm text-text-muted-light dark:text-text-muted-dark">
-                            <span class="px-4 py-2 rounded-xl border border-border-light dark:border-border-dark">Cybersecurity</span>
-                            <span class="px-4 py-2 rounded-xl border border-border-light dark:border-border-dark">Linux</span>
-                            <span class="px-4 py-2 rounded-xl border border-border-light dark:border-border-dark">Python</span>
-                            <span class="px-4 py-2 rounded-xl border border-border-light dark:border-border-dark">Systems design</span>
-                            <span class="px-4 py-2 rounded-xl border border-border-light dark:border-border-dark">Risk modelling</span>
-                            <span class="px-4 py-2 rounded-xl border border-border-light dark:border-border-dark">Digital accessibility</span>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-2">
+                            <span class="px-3 py-2 rounded-xl text-xs font-medium bg-base-light dark:bg-base-dark border border-border-light dark:border-border-dark flex items-center gap-2">
+                                <i class="fa-solid fa-chart-column text-amber-500"></i> Power BI
+                            </span>
+                            <span class="px-3 py-2 rounded-xl text-xs font-medium bg-base-light dark:bg-base-dark border border-border-light dark:border-border-dark flex items-center gap-2">
+                                <i class="fa-solid fa-chart-area text-orange-500"></i> Tableau
+                            </span>
+                            <span class="px-3 py-2 rounded-xl text-xs font-medium bg-base-light dark:bg-base-dark border border-border-light dark:border-border-dark flex items-center gap-2">
+                                <i class="devicon-microsoftsqlserver-plain text-red-500"></i> 
+                                <span data-l="fr">SQL Server (Requêtes & Rapports)</span>
+                                <span data-l="en" class="hidden">SQL Server (Queries & Reporting)</span>
+                            </span>
+                            <span class="px-3 py-2 rounded-xl text-xs font-medium bg-base-light dark:bg-base-dark border border-border-light dark:border-border-dark flex items-center gap-2">
+                                <i class="fa-solid fa-file-excel text-emerald-600"></i> 
+                                <span data-l="fr">Excel Avancé (Power Query)</span>
+                                <span data-l="en" class="hidden">Advanced Excel (Power Query)</span>
+                            </span>
                         </div>
                     </div>
 
-                    <div id="about-fr" class="hidden text-lg text-text-muted-light dark:text-text-muted-dark space-y-6 text-left">
-                        <div class="flex items-center gap-4">
-                            <div
-                                class="w-12 h-12 rounded-full bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 font-semibold flex items-center justify-center">
-                                J</div>
+                    <!-- Bloc 2: Applicatif & Systèmes d'entreprise -->
+                    <div class="p-6 rounded-3xl bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark shadow-sm hover:border-indigo-500/40 transition-all space-y-4 flex flex-col justify-between">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 rounded-xl bg-blue-500/10 text-blue-600 dark:text-blue-400 flex items-center justify-center text-xl shrink-0">
+                                <i class="fa-solid fa-server"></i>
+                            </div>
                             <div>
-                                <p class="text-xs uppercase tracking-[0.3em] text-text-muted-light dark:text-text-muted-dark">À propos</p>
-                                <h3 class="text-3xl font-semibold text-text-main-light dark:text-text-main-dark">Julia</h3>
+                                <h3 class="text-lg font-bold text-text-main-light dark:text-text-main-dark">
+                                    <span data-l="fr">2. Applicatif & Systèmes d'entreprise</span>
+                                    <span data-l="en" class="hidden">2. Enterprise Systems & Apps</span>
+                                </h3>
+                                <p class="text-xs text-text-muted-light dark:text-text-muted-dark">
+                                    <span data-l="fr">ERP, Support Critique, Windows & Linux</span>
+                                    <span data-l="en" class="hidden">ERP, Critical Support, Windows & Linux</span>
+                                </p>
                             </div>
                         </div>
-                        <p class="text-3xl font-serif italic text-text-main-light dark:text-text-main-dark">Rendre la technologie plus humaine</p>
-                        <p>Depuis plus de cinq ans, j'évolue dans le versant technique de l'infrastructure numerique, en
-                            securisant des environnements Linux, en automatisant des flux de travail avec Python et en
-                            concevant des systemes capables de tenir sous pression. Mais ce qui compte le plus pour moi,
-                            ce n'est pas le code. C'est ce que le code rend possible pour les personnes qui l'utilisent.
-                        </p>
-                        <hr class="border-border-light dark:border-border-dark">
-                        <p>La securite, pour moi, ne consiste pas a restreindre. Un pare feu bien pense est une porte
-                            accueillante pour les bonnes personnes et une limite calme mais ferme pour celles qui n'ont
-                            pas a entrer. Un systeme bien concu n'oblige pas les utilisateurs a s'adapter a lui. Il
-                            s'efface a l'arriere plan et leur permet de se concentrer sur l'essentiel.</p>
-                        <p>C'est le fil conducteur de tout ce que je fais : traduire le langage complexe des systemes et
-                            de la securite en quelque chose de clair, d'utile et d'ancre dans la maniere dont les gens
-                            travaillent et vivent reellement.</p>
-                        <hr class="border-border-light dark:border-border-dark">
-                        <p>Ce site est l'endroit ou je partage cette vision, des reflexions concretes, des retours
-                            honnetes et des ressources construites autour d'une idee simple : un monde numerique plus
-                            sur devrait aussi etre un monde plus facile a comprendre.</p>
-                        <div class="flex flex-wrap gap-3 text-sm text-text-muted-light dark:text-text-muted-dark">
-                            <span class="px-4 py-2 rounded-xl border border-border-light dark:border-border-dark">Cybersecurite</span>
-                            <span class="px-4 py-2 rounded-xl border border-border-light dark:border-border-dark">Linux</span>
-                            <span class="px-4 py-2 rounded-xl border border-border-light dark:border-border-dark">Python</span>
-                            <span class="px-4 py-2 rounded-xl border border-border-light dark:border-border-dark">Conception systeme</span>
-                            <span class="px-4 py-2 rounded-xl border border-border-light dark:border-border-dark">Modelisation du risque</span>
-                            <span class="px-4 py-2 rounded-xl border border-border-light dark:border-border-dark">Accessibilite numerique</span>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-2">
+                            <span class="px-3 py-2 rounded-xl text-xs font-medium bg-base-light dark:bg-base-dark border border-border-light dark:border-border-dark flex items-center gap-2">
+                                <i class="fa-solid fa-boxes-stacked text-blue-500"></i> 
+                                <span data-l="fr">ERP (Dépannage & Flux)</span>
+                                <span data-l="en" class="hidden">ERP (Troubleshooting & Workflows)</span>
+                            </span>
+                            <span class="px-3 py-2 rounded-xl text-xs font-medium bg-base-light dark:bg-base-dark border border-border-light dark:border-border-dark flex items-center gap-2">
+                                <i class="devicon-linux-plain text-yellow-500"></i> Linux
+                            </span>
+                            <span class="px-3 py-2 rounded-xl text-xs font-medium bg-base-light dark:bg-base-dark border border-border-light dark:border-border-dark flex items-center gap-2">
+                                <i class="devicon-windows8-original text-sky-500"></i> Windows Server & AD
+                            </span>
+                            <span class="px-3 py-2 rounded-xl text-xs font-medium bg-base-light dark:bg-base-dark border border-border-light dark:border-border-dark flex items-center gap-2">
+                                <i class="fa-solid fa-headset text-amber-500"></i> 
+                                <span data-l="fr">Support Applicatif Critique</span>
+                                <span data-l="en" class="hidden">Critical Application Support</span>
+                            </span>
                         </div>
                     </div>
+
+                    <!-- Bloc 3: Infrastructure & Sécurité opérationnelle -->
+                    <div class="p-6 rounded-3xl bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark shadow-sm hover:border-indigo-500/40 transition-all space-y-4 flex flex-col justify-between">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-xl shrink-0">
+                                <i class="fa-solid fa-shield-halved"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-bold text-text-main-light dark:text-text-main-dark">
+                                    <span data-l="fr">3. Infrastructure & Sécurité opérationnelle</span>
+                                    <span data-l="en" class="hidden">3. Infrastructure & Operational Security</span>
+                                </h3>
+                                <p class="text-xs text-text-muted-light dark:text-text-muted-dark">
+                                    <span data-l="fr">Réseaux, IAM / RBAC, Pare-feu</span>
+                                    <span data-l="en" class="hidden">Networking, IAM / RBAC, Firewalls</span>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-2">
+                            <span class="px-3 py-2 rounded-xl text-xs font-medium bg-base-light dark:bg-base-dark border border-border-light dark:border-border-dark flex items-center gap-2">
+                                <i class="fa-solid fa-network-wired text-emerald-500"></i> 
+                                <span data-l="fr">Réseaux & Segmentation (VLANs)</span>
+                                <span data-l="en" class="hidden">Networking & Segmentation (VLANs)</span>
+                            </span>
+                            <span class="px-3 py-2 rounded-xl text-xs font-medium bg-base-light dark:bg-base-dark border border-border-light dark:border-border-dark flex items-center gap-2">
+                                <i class="fa-solid fa-fire-flame-curved text-rose-500"></i> 
+                                <span data-l="fr">Pare-feu</span>
+                                <span data-l="en" class="hidden">Firewalls</span>
+                            </span>
+                            <span class="px-3 py-2 rounded-xl text-xs font-medium bg-base-light dark:bg-base-dark border border-border-light dark:border-border-dark flex items-center gap-2">
+                                <i class="fa-solid fa-user-lock text-indigo-500"></i> IAM / RBAC / MFA
+                            </span>
+                            <span class="px-3 py-2 rounded-xl text-xs font-medium bg-base-light dark:bg-base-dark border border-border-light dark:border-border-dark flex items-center gap-2">
+                                <i class="fa-solid fa-clipboard-check text-sky-500"></i> 
+                                <span data-l="fr">Hygiène de sécurité & Audits</span>
+                                <span data-l="en" class="hidden">Security Hygiene & Audits</span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Bloc 4: Automatisation, Scripting & IA -->
+                    <div class="p-6 rounded-3xl bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark shadow-sm hover:border-indigo-500/40 transition-all space-y-4 flex flex-col justify-between">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 rounded-xl bg-purple-500/10 text-purple-600 dark:text-purple-400 flex items-center justify-center text-xl shrink-0">
+                                <i class="fa-solid fa-robot"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-bold text-text-main-light dark:text-text-main-dark">
+                                    <span data-l="fr">4. Automatisation, Scripting & IA</span>
+                                    <span data-l="en" class="hidden">4. Automation, Scripting & AI</span>
+                                </h3>
+                                <p class="text-xs text-text-muted-light dark:text-text-muted-dark">Python, AI, PowerShell, Bash</p>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-2">
+                            <span class="px-3 py-2 rounded-xl text-xs font-medium bg-base-light dark:bg-base-dark border border-border-light dark:border-border-dark flex items-center gap-2">
+                                <i class="devicon-python-plain text-yellow-500"></i> 
+                                <span data-l="fr">Python (Automatisation & Data)</span>
+                                <span data-l="en" class="hidden">Python (Automation & Data)</span>
+                            </span>
+                            <span class="px-3 py-2 rounded-xl text-xs font-medium bg-base-light dark:bg-base-dark border border-border-light dark:border-border-dark flex items-center gap-2">
+                                <i class="fa-solid fa-wand-magic-sparkles text-purple-500"></i> 
+                                <span data-l="fr">Outils IA & LLMs</span>
+                                <span data-l="en" class="hidden">AI & LLM Tools</span>
+                            </span>
+                            <span class="px-3 py-2 rounded-xl text-xs font-medium bg-base-light dark:bg-base-dark border border-border-light dark:border-border-dark flex items-center gap-2">
+                                <i class="devicon-powershell-plain text-blue-400"></i> PowerShell Scripting
+                            </span>
+                            <span class="px-3 py-2 rounded-xl text-xs font-medium bg-base-light dark:bg-base-dark border border-border-light dark:border-border-dark flex items-center gap-2">
+                                <i class="devicon-bash-plain text-gray-400"></i> Bash / Shell Scripting
+                            </span>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </section>
 
-        <section id="skills" class="py-20 bg-card-light dark:bg-card-dark border-y border-border-light dark:border-border-dark">
-            <div class="container mx-auto px-4">
-                <h2 class="text-4xl font-bold text-center mb-12" data-lang-en="Skills & Tech Stack"
-                    data-lang-fr="Compétences & Technologies">Skills & Tech Stack</h2>
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 max-w-6xl mx-auto">
-
-                    <div class="flex flex-col items-center text-center p-4 bg-base-light dark:bg-base-dark border border-border-light dark:border-border-dark rounded-lg shadow-lg">
-                        <i class="fas fa-network-wired fa-2x text-indigo-400 mb-3"></i>
-                        <h3 class="text-lg font-bold mb-2" data-lang-en="Network & Configuration Management"
-                            data-lang-fr="Gestion Réseau & Configuration">Network & Configuration Management</h3>
-                        <p class="text-xs text-text-muted-light dark:text-text-muted-dark" data-lang-en="LAN/WAN, VLANs, firewalls, pfSense, Group Policy"
-                            data-lang-fr="LAN/WAN, VLANs, pare-feu, pfSense, Group Policy">LAN/WAN, VLANs, firewalls,
-                            pfSense, Group Policy</p>
-                    </div>
-                    <div class="flex flex-col items-center text-center p-4 bg-base-light dark:bg-base-dark border border-border-light dark:border-border-dark rounded-lg shadow-lg">
-                        <i class="fas fa-server fa-2x text-indigo-400 mb-3"></i>
-                        <h3 class="text-lg font-bold mb-2" data-lang-en="Virtualization & Containerization"
-                            data-lang-fr="Virtualisation & Conteneurisation">Virtualization & Containerization</h3>
-                        <p class="text-xs text-text-muted-light dark:text-text-muted-dark" data-lang-en="Proxmox, VMware, Docker"
-                            data-lang-fr="Proxmox, VMware, Docker">Proxmox, VMware, Docker</p>
-                    </div>
-                    <div class="flex flex-col items-center text-center p-4 bg-base-light dark:bg-base-dark border border-border-light dark:border-border-dark rounded-lg shadow-lg">
-                        <i class="fas fa-cloud fa-2x text-indigo-400 mb-3"></i>
-                        <h3 class="text-lg font-bold mb-2" data-lang-en="Cloud Infrastructure Management"
-                            data-lang-fr="Gestion d'Infrastructure Cloud">Cloud Infrastructure Management</h3>
-                        <p class="text-xs text-text-muted-light dark:text-text-muted-dark" data-lang-en="Azure, AWS, GCP" data-lang-fr="Azure, AWS, GCP">
-                            Azure, AWS, GCP</p>
-                    </div>
-                    <div class="flex flex-col items-center text-center p-4 bg-base-light dark:bg-base-dark border border-border-light dark:border-border-dark rounded-lg shadow-lg">
-                        <i class="fas fa-chart-pie fa-2x text-indigo-400 mb-3"></i>
-                        <h3 class="text-lg font-bold mb-2" data-lang-en="Data Analysis"
-                            data-lang-fr="Analyse de Données">Data Analysis</h3>
-                        <p class="text-xs text-text-muted-light dark:text-text-muted-dark"
-                            data-lang-en="Tensorflow, Matlab, Apache Spark, PowerBI, Tableau, Excel"
-                            data-lang-fr="Tensorflow, Matlab, Apache Spark, PowerBI, Tableau, Excel">Tensorflow, Matlab,
-                            Apache Spark, PowerBI, Tableau, Excel</p>
-                    </div>
-                    <div class="flex flex-col items-center text-center p-4 bg-base-light dark:bg-base-dark border border-border-light dark:border-border-dark rounded-lg shadow-lg">
-                        <i class="fas fa-cogs fa-2x text-indigo-400 mb-3"></i>
-                        <h3 class="text-lg font-bold mb-2" data-lang-en="Infrastructure Automation"
-                            data-lang-fr="Automatisation d'Infrastructure">Infrastructure Automation</h3>
-                        <p class="text-xs text-text-muted-light dark:text-text-muted-dark" data-lang-en="Ansible, Terraform, Bash/Python scripting"
-                            data-lang-fr="Ansible, Terraform, Scripting Bash/Python">Ansible, Terraform, Bash/Python
-                            scripting</p>
-                    </div>
-                    <div class="flex flex-col items-center text-center p-4 bg-base-light dark:bg-base-dark border border-border-light dark:border-border-dark rounded-lg shadow-lg">
-                        <i class="fas fa-shield-alt fa-2x text-indigo-400 mb-3"></i>
-                        <h3 class="text-lg font-bold mb-2" data-lang-en="Cybersecurity" data-lang-fr="Cybersécurité">
-                            Cybersecurity</h3>
-                        <p class="text-xs text-text-muted-light dark:text-text-muted-dark"
-                            data-lang-en="Security Hardening, Patch Management, EDR, SOC, SIEM, Zero Trust Architecture, Network Segmentation"
-                            data-lang-fr="Durcissement de la Sécurité, Gestion des Correctifs, EDR, SOC, SIEM, Architecture Zero Trust, Segmentation Réseau">
-                            Security Hardening, Patch Management, EDR, SOC, SIEM, Zero Trust Architecture, Network
-                            Segmentation</p>
-                    </div>
-                    <div class="flex flex-col items-center text-center p-4 bg-base-light dark:bg-base-dark border border-border-light dark:border-border-dark rounded-lg shadow-lg">
-                        <i class="fas fa-database fa-2x text-indigo-400 mb-3"></i>
-                        <h3 class="text-lg font-bold mb-2" data-lang-en="Backup & Disaster Recovery"
-                            data-lang-fr="Sauvegarde & Reprise après Sinistre">Backup & Disaster Recovery</h3>
-                        <p class="text-xs text-text-muted-light dark:text-text-muted-dark" data-lang-en="Planning and implementation"
-                            data-lang-fr="Planification et mise en œuvre">Planning and implementation</p>
-                    </div>
-                    <div class="flex flex-col items-center text-center p-4 bg-base-light dark:bg-base-dark border border-border-light dark:border-border-dark rounded-lg shadow-lg">
-                        <i class="fas fa-id-card fa-2x text-indigo-400 mb-3"></i>
-                        <h3 class="text-lg font-bold mb-2" data-lang-en="Identity & Access Management"
-                            data-lang-fr="Gestion des Identités et des Accès">Identity & Access Management</h3>
-                        <p class="text-xs text-text-muted-light dark:text-text-muted-dark" data-lang-en="LDAP, Active Directory, MFA"
-                            data-lang-fr="LDAP, Active Directory, MFA">LDAP, Active Directory, MFA</p>
-                    </div>
-                    <div class="flex flex-col items-center text-center p-4 bg-base-light dark:bg-base-dark border border-border-light dark:border-border-dark rounded-lg shadow-lg">
-                        <i class="fas fa-chart-bar fa-2x text-indigo-400 mb-3"></i>
-                        <h3 class="text-lg font-bold mb-2" data-lang-en="Business Analysis"
-                            data-lang-fr="Analyse d'affaires">Business Analysis</h3>
-                        <p class="text-xs text-text-muted-light dark:text-text-muted-dark" data-lang-en="Requirements gathering, process optimization"
-                            data-lang-fr="Collecte des exigences, optimisation des processus">Requirements gathering,
-                            process optimization</p>
-                    </div>
-                    <div class="flex flex-col items-center text-center p-4 bg-base-light dark:bg-base-dark border border-border-light dark:border-border-dark rounded-lg shadow-lg">
-                        <i class="fas fa-project-diagram fa-2x text-indigo-400 mb-3"></i>
-                        <h3 class="text-lg font-bold mb-2" data-lang-en="Project Management"
-                            data-lang-fr="Gestion de Projet">Project Management</h3>
-                        <p class="text-xs text-text-muted-light dark:text-text-muted-dark" data-lang-en="Agile, Scrum, Waterfall methodologies"
-                            data-lang-fr="Méthodologies Agile, Scrum, Waterfall">Agile, Scrum, Waterfall methodologies
-                        </p>
-                    </div>
-
+        <!-- Contact Section -->
+        <section id="contact" class="py-20 border-t border-border-light dark:border-border-dark">
+            <div class="max-w-xl mx-auto text-center space-y-8">
+                <div class="space-y-3">
+                    <h2 class="text-3xl font-bold tracking-tight text-text-main-light dark:text-text-main-dark" data-lang-en="Contact" data-lang-fr="Me contacter">
+                        Me contacter
+                    </h2>
+                    <p class="text-base text-text-muted-light dark:text-text-muted-dark" data-lang-en="Open for professional discussions & opportunities" data-lang-fr="Au plaisir d'échanger et de collaborer">
+                        Au plaisir d'échanger et de collaborer
+                    </p>
                 </div>
-            </div>
-        </section>
 
-
-        <section id="contact" class="py-20">
-            <div class="container mx-auto px-4">
-                <h2 class="text-4xl font-bold text-center mb-12" data-lang-en="Contact" data-lang-fr="Contact">Contact
-                </h2>
-                <div class="max-w-lg mx-auto">
-                    <div class="text-center">
-                        <p class="text-2xl text-text-main-light dark:text-text-main-dark mb-8" data-lang-en="I am happy to connect"
-                            data-lang-fr="Au plaisir d'échanger">I am happy to connect</p>
-                        <div class="flex justify-center space-x-8">
-                            <a href="https://cm.linkedin.com/in/c-yossa-julia-d" target="_blank"
-                                rel="noopener noreferrer"
-                                class="text-indigo-400 hover:text-indigo-300 transition-colors" aria-label="LinkedIn">
-                                <i class="fab fa-linkedin fa-3x"></i>
-                            </a>
-                            <a href="https://x.com/juliayossa" target="_blank" rel="noopener noreferrer"
-                                class="text-indigo-400 hover:text-indigo-300 transition-colors"
-                                aria-label="X (Twitter)">
-                                <i class="fab fa-x-twitter fa-3x"></i>
-                            </a>
-                        </div>
-                    </div>
+                <div class="flex items-center justify-center space-x-6">
+                    <a href="https://cm.linkedin.com/in/c-yossa-julia-d" target="_blank" rel="noopener noreferrer" class="p-4 rounded-2xl bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark text-indigo-600 dark:text-indigo-400 hover:scale-105 hover:border-indigo-500 transition-all shadow-sm" aria-label="LinkedIn">
+                        <i class="fab fa-linkedin text-2xl"></i>
+                    </a>
+                    <a href="https://x.com/juliayossa" target="_blank" rel="noopener noreferrer" class="p-4 rounded-2xl bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark text-indigo-600 dark:text-indigo-400 hover:scale-105 hover:border-indigo-500 transition-all shadow-sm" aria-label="X (Twitter)">
+                        <i class="fab fa-x-twitter text-2xl"></i>
+                    </a>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer class="bg-card-light dark:bg-card-dark py-6 border-t border-border-light dark:border-border-dark">
-        <div class="container mx-auto px-4 text-center text-text-muted-light dark:text-text-muted-dark">
-            <p>Built with 💜 by Julia Yossa</p>
+    <!-- Footer -->
+    <footer class="py-8 border-t border-border-light dark:border-border-dark bg-card-light/40 dark:bg-card-dark/40">
+        <div class="container mx-auto px-4 text-center text-xs text-text-muted-light dark:text-text-muted-dark space-y-2">
+            <p>© 2026 Julia Yossa — Infrastructure & Business Intelligence Analyst</p>
         </div>
     </footer>
 
